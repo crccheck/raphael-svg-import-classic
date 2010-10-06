@@ -7,6 +7,7 @@
 * 
 * 2010-10-05 modifications by Jonas Olmstead
 * - added support for radial and linear gradients
+* - added support for paths
 * - removed prototype.js dependencies (I can't read that stuff)
 * - changed input parameter to svg xml file
 * - added support for text elements
