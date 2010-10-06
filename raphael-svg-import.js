@@ -22,7 +22,7 @@ Raphael.fn.importSVG = function (svgXML) {
     // create a set to return 
     var myNewSet = this.set();
     
-    var strSupportedShapes = "|rect|circle|ellipse|path|image|text|";
+    var strSupportedShapes = "|rect|circle|ellipse|path|image|text|polygon|";
     var node;
     var match;
     
@@ -177,7 +177,16 @@ Raphael.fn.importSVG = function (svgXML) {
 	            shape = this.path(attr["d"]);
 	          break;
 	          case "polygon":
-	            shape = this.polygon(attr["points"]);
+	            var point_string = attr["points"].trim();
+	            var aryPoints = point_string.split(" ");
+	            var strNewPoints = "M";
+	        	for (var i in aryPoints) {
+	        		if (i > 0)
+	        			strNewPoints += "L";
+	        		strNewPoints += aryPoints[i];
+	        	}
+	        	strNewPoints += "Z";
+	        	shape = this.path(strNewPoints);
 	          break;
 	          case "image":
 	            shape = this.image();
@@ -222,16 +231,3 @@ Raphael.fn.importSVG = function (svgXML) {
   return myNewSet;
   
 };
-
-// extending raphael with a polygon function
-//Raphael.fn.polygon = function(point_string) {
-//  var poly_array = ["M"];
-//  $w(point_string).each(function(point, i) {
-//    point.split(",").each(function(c) {
-//      poly_array.push(parseFloat(c));
-//    });
-//    if (i == 0) poly_array.push("L");
-//  });
-//  poly_array.push("Z");
-//  return this.path(poly_array.compact());
-//};
