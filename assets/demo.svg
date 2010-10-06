@@ -20,4 +20,5 @@
 <ellipse opacity="0.3" fill="#00FFFF" stroke="#0097E6" stroke-width="7" stroke-dasharray="12" cx="391.509" cy="131.292" rx="69.875" ry="29.192"/>
 <polygon opacity="0.3" fill="#00FF00" stroke="#009D00" stroke-width="7" points="129.584,339.484 64.108,354.755 18.145,305.688 37.658,241.348 
 	103.134,226.077 149.097,275.145 "/>
+<text x="280" y="400" fill="#000000" text-anchor="middle" font-family="Arial" font-size="14" >sample text</text>
 </svg>
