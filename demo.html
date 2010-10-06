@@ -9,28 +9,19 @@
 	<script src="./raphael-svg-import.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 	
-		window.onload = function() {
+		function parseXml(svgXML) {
 			var paper = Raphael(10,10,800,600);
-			// FOR IE THIS MUST BE .XML!!!
-			jQuery.get("./assets/demo.svg?random=" + Math.random(),function(svgXML) {
-			
-				// if a string comes back, convert to xml
-				if (typeof svgXML == "string") {
-					if (window.DOMParser)
-						svgXML = (new DOMParser()).parseFromString(svgXML, "text/xml");
-					else {
-						// Internet Explorer
-						xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
-						xmlDoc.async="false";
-						xmlDoc.loadXML(svgXML);
-						svgXML = xmlDoc;
-						// IE doesn't seemt to like loading from local file system, dunno why
-					} 				
-				}
-
-				var newSet = paper.importSVG(svgXML);
-			});
+			var newSet = paper.importSVG(svgXML);
 		}
+	
+		jQuery(document).ready(function(){
+			jQuery.ajax({
+				type: "GET",
+				url: "./assets/demo.svg.XML",
+				dataType: "xml",
+				success: parseXml
+			});
+		});
 	</script>
   </head>
   
