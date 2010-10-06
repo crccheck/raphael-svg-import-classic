@@ -13,7 +13,6 @@
 * - added support for text elements
 * - added support for reading groups into flat structure
 * - svg elements returned as a set
-* - removed polygon object
 *
 */
 Raphael.fn.importSVG = function (svgXML) {
