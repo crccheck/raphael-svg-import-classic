@@ -7,7 +7,7 @@ It enables Raphael to import SVG files.
 ### Usage
 
     var paper = Raphael(10, 10, 800, 500);
-    paper.importSVG(svgData);
+    paper.importSVG(svgXML);
 
 You must change SVG file extensions to ".XML" in order to work with IE.
 
