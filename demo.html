@@ -1,37 +1,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>Raphael SVG Import - Interactive demo</title>
-    <style type="text/css" media="screen">
-      body, html {
-        margin: 0;
-        padding: 0;
-        background-color: #fff;
-        height: 100%;
-      }
-      #paper {
-        width:100%;
-        height: 100%;
-      }
-      #buttons {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-      }
-    </style>
+	<script src="lib/raphael-min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/jquery-1.4.2.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./raphael-svg-import.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+	
+		window.onload = function() {
+			var paper = Raphael(10,10,800,600);
+			// FOR IE THIS MUST BE .XML!!!
+			jQuery.get("./assets/demo.svg?random=" + Math.random(),function(svgXML) {
+			
+				// if a string comes back, convert to xml
+				if (typeof svgXML == "string") {
+					if (window.DOMParser)
+						svgXML = (new DOMParser()).parseFromString(svgXML, "text/xml");
+					else {
+						// Internet Explorer
+						xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+						xmlDoc.async="false";
+						xmlDoc.loadXML(svgXML);
+						svgXML = xmlDoc;
+						// IE doesn't seemt to like loading from local file system, dunno why
+					} 				
+				}
+
+				var newSet = paper.importSVG(svgXML);
+			});
+		}
+	</script>
   </head>
   
   <body>
-    <div id="paper"></div>
-    <div id="buttons">
-      <input type="button" name="import" value="Import SVG" class="button" onclick="Demo.importSVG()" />
-    </div>
   </body>
-  <script src="lib/prototype.js" type="text/javascript" charset="utf-8"></script>
-  <script src="lib/onresize.js" type="text/javascript" charset="utf-8"></script>
-  <script src="lib/raphael-min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="raphael-svg-import.js" type="text/javascript" charset="utf-8"></script>
-  <script src="src/demo.js" type="text/javascript" charset="utf-8"></script>
 </html>
