@@ -13,7 +13,8 @@
 			var paper = Raphael(10,10,800,600);
 			var newSet = paper.importSVG(svgXML);
 		}
-	
+	        
+                // must use file extension ".XML" for IE support!
 		jQuery(document).ready(function(){
 			jQuery.ajax({
 				type: "GET",
