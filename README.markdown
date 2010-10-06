@@ -7,7 +7,7 @@ It enables Raphael to import SVG files.
 ### Usage
 
     var paper = Raphael(10, 10, 800, 500);
-    paper.importSVG('<sgv><rect x="53.603" y="93.813" fill="#FF00FF" width="106.211" height="106.211"/></svg>')
+    paper.importSVG(svgData);
 
 You must change SVG file extensions to ".XML" in order to work with IE.
 
@@ -22,8 +22,5 @@ Nothing fancy but it gives you a starting point.
 
 
 ### To-do
-- SVG group to Raphael set conversion
-- line recognition
-- text recognition
-- image recognition
-- writing tests (yes I've been lazy :-)
+- fix hardcoded radial and linear gradient offsets
+- fix gradient fills within a style
