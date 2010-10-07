@@ -16,6 +16,7 @@ Nothing fancy but it gives you a starting point.
 
 ### Dependencies
 - [Raphael JS](http://raphaeljs.com/)
+- [jQuery](http://jquery.com/) (for the demo only, the library does not require it
 
 ### Important
 - This plugin is still under development
