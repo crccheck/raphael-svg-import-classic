@@ -16,6 +16,18 @@
 *
 */
 Raphael.fn.importSVG = function (svgXML) {
+
+  function applyMatrix(shape, m){
+    var scale = m[0] * m[3] - m[1] * m[2];
+    if (scale != 1) shape.scale(scale, scale);
+    // some common rotations
+    if (m[0] == 0 && m[1] == -1 && m[2] == 1 && m[3] == 0) shape.rotate(-90, 0, 0);
+    if (m[0] == -1 && m[1] == 0 && m[2] == 0 && m[3] == -1) shape.rotate(-180, 0, 0);
+    if (m[0] == 0 && m[1] == 1 && m[2] == -1 && m[3] == 0) shape.rotate(90, 0, 0);
+    shape.translate(m[4], m[5]);
+    return shape;
+  }
+
   try {
     // create a set to return
     var myNewSet = this.set();
@@ -106,14 +118,12 @@ Raphael.fn.importSVG = function (svgXML) {
     }
 
     this.parseElement = function(elShape) {
-        var m_font;
         var node = elShape.nodeName;
         if (node && strSupportedShapes.indexOf("|" + node + "|") >= 0) {
 
             var attr = { "stroke-width": 0 }; /* over-ride Raphael.js wants to put stroke on everything */
             var shape;
             var style;
-            m_font = "";
             for (var k=0;k<elShape.attributes.length;k++) {
                 m = elShape.attributes[k];
 
@@ -133,13 +143,6 @@ Raphael.fn.importSVG = function (svgXML) {
                   case "fill":
                       this.doFill(node,attr,m.nodeName,m.nodeValue);
                   break;
-                  case "font-size":
-                      m_font = m.nodeValue + "px " + m_font;
-                      attr[m.nodeName] = m.nodeValue;
-                  break;
-                  case "font-family":
-                      m_font = m_font + "\"" + m.nodeValue + "\"";
-                  break;
                   case "x":
                   case "y":
                   case "cx":
@@ -148,9 +151,6 @@ Raphael.fn.importSVG = function (svgXML) {
                   case "ry":
                       // use numbers for location coords
                       attr[m.nodeName] = parseFloat(m.nodeValue);
-                  break;
-                  case "text-anchor":
-                      // skip these due to bug in text scaling
                   break;
                   default:
                     attr[m.nodeName] = m.nodeValue;
@@ -194,10 +194,8 @@ Raphael.fn.importSVG = function (svgXML) {
                 shape = this.image();
               break;
               case "text":
-                  shape = this.text(attr["x"],attr["y"],elShape.text || elShape.textContent);
-                  shape.attr("font",m_font);
-                  shape.attr("stroke","none");
-                  shape.origFontPt = parseInt(attr["font-size"]);
+                  shape = this.text(attr["x"], attr["y"], elShape.text || elShape.textContent);
+                  shape.attr("text-anchor", attr["text-anchor"] || "start"); // raphael wants to make this middle instead of start
               break;
             }
 
@@ -205,9 +203,7 @@ Raphael.fn.importSVG = function (svgXML) {
             var matrix = attr.transform;
             if (matrix) {
                 matrix = matrix.substring(7, matrix.length-1).split(', ');
-                console.log(matrix)
-                //shape.matrix(+matrix[0], +matrix[1], +matrix[2], +matrix[3]);
-                shape.translate(matrix[4], matrix[5]);
+                shape = applyMatrix(shape, matrix);
                 delete attr.transform;
             }
             shape.attr(attr);
@@ -224,7 +220,6 @@ Raphael.fn.importSVG = function (svgXML) {
   } catch (error) {
     console.log("The SVG data you entered was invalid! (" + error + ")");
   }
-
   // return our new set
   return myNewSet;
 
