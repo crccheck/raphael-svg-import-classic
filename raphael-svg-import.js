@@ -3,8 +3,8 @@
 *
 * Copyright (c) 2009 Wout Fierens
 * Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
-* 
-* 
+*
+*
 * 2010-10-05 modifications by Jonas Olmstead
 * - added support for radial and linear gradients
 * - added support for paths
@@ -17,21 +17,18 @@
 */
 Raphael.fn.importSVG = function (svgXML) {
   try {
-    
-    // create a set to return 
+    // create a set to return
     var myNewSet = this.set();
-    
+
     var strSupportedShapes = "|rect|circle|ellipse|path|image|text|polygon|";
     var node;
     var match;
-    
     var m;
-    
+
     // collect all gradient colors
     var linGrads = svgXML.getElementsByTagName("linearGradient");
     var radGrads = svgXML.getElementsByTagName("radialGradient");
-    
-    
+
     this.doFill = function(strNode,attr,mNodeName,mNodeValue) {
       // check if linear gradient
       if (m.nodeValue.indexOf("url") == 0) {
@@ -63,7 +60,7 @@ Raphael.fn.importSVG = function (svgXML) {
                     if (stop1.getAttribute("stop-opacity"))
                         opacity = stop1.getAttribute("stop-opacity")
               }
-                  
+
           for (var l=0;l<linGrads.length;l++)
               if (linGrads.item(l).getAttribute("id") == gradID) {
                         // get angle
@@ -72,9 +69,9 @@ Raphael.fn.importSVG = function (svgXML) {
                     var angle = Math.atan(b/c);
                     if (c < 0)
                         angle = angle - Math.PI;
-                        
+
                     angle = parseInt(Raphael.deg(angle) + 360) % 360;
-                  
+
                     // get stops
                     var stop1, stop2;
                     for (var st=0;st<linGrads.item(l).childNodes.length;st++)
@@ -85,8 +82,8 @@ Raphael.fn.importSVG = function (svgXML) {
                                 stop1 = linGrads.item(l).childNodes.item(st);
                         }
                     // TODO: hardcoded offset value of 50
-                    attr[mNodeName] = angle + "-" + stop1.getAttribute("stop-color") 
-                        + "-" + stop2.getAttribute("stop-color") 
+                    attr[mNodeName] = angle + "-" + stop1.getAttribute("stop-color")
+                        + "-" + stop2.getAttribute("stop-color")
                         + ":50-" + stop1.getAttribute("stop-color");
                     if (stop1.getAttribute("stop-opacity"))
                         opacity = stop1.getAttribute("stop-opacity")
@@ -96,23 +93,35 @@ Raphael.fn.importSVG = function (svgXML) {
       } else {
           attr[mNodeName] = mNodeValue;
       }
-        
     };
-    
+
+    this.parseNode = function(node){
+      a = node;
+      if (node.nodeName == "g") {
+        var tempSet = this.set();
+        for (var i = 0; i < node.childNodes.length; i++){
+          tempSet.push(this.parseNode(node.childNodes.item(i)));
+        }
+        return tempSet;
+      } else {
+        return this.parseElement(node);
+      }
+    }
+
     this.parseElement = function(elShape) {
         node = elShape.nodeName;
         if (node && strSupportedShapes.indexOf("|" + node + "|") >= 0) {
-                    
+
             var attr = { "stroke-width": 0, "fill":"#fff" };
             var shape;
             var style;
             // find the id
             var nodeID = elShape.getAttribute("id");
-            
+
             m_font = "";
             for (var k=0;k<elShape.attributes.length;k++) {
-                  m = elShape.attributes[k];
-                    
+                m = elShape.attributes[k];
+
                 switch(m.nodeName) {
                   case "stroke-dasharray":
                     attr[m.nodeName] = "- ";
@@ -152,9 +161,8 @@ Raphael.fn.importSVG = function (svgXML) {
                     attr[m.nodeName] = m.nodeValue;
                   break;
                 }
+            }
 
-              }
-            
             switch(node) {
               case "rect":
                   if (attr["rx"])
@@ -197,36 +205,24 @@ Raphael.fn.importSVG = function (svgXML) {
                   shape.origFontPt = parseInt(attr["font-size"]);
               break;
             }
-            
-            // put shape into set 
-            myNewSet.push(shape);
-                        
+
             shape.attr(attr);
+            return shape;
         }
     };
-    
-    var elShape;
+
     var m_font;
     var elSVG = svgXML.getElementsByTagName("svg")[0];
     elSVG.normalize();
     for (var i=0;i<elSVG.childNodes.length;i++) {
-        elShape = elSVG.childNodes.item(i);
-        
-        if (elShape.nodeName == "g") {
-            // this is a group, parse the children
-            for (var o=0;o<elShape.childNodes.length;o++)
-                this.parseElement(elShape.childNodes.item(o));
-        }
-        else
-            this.parseElement(elShape);
-        
+        myNewSet.push(this.parseNode(elSVG.childNodes.item(i)));
     }
 
   } catch (error) {
     alert("The SVG data you entered was invalid! (" + error + ")");
   }
-  
+
   // return our new set
   return myNewSet;
-  
+
 };
