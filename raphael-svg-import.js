@@ -21,8 +21,6 @@ Raphael.fn.importSVG = function (svgXML) {
     var myNewSet = this.set();
 
     var strSupportedShapes = "|rect|circle|ellipse|path|image|text|polygon|";
-    var node;
-    var match;
     var m;
 
     // collect all gradient colors
@@ -96,7 +94,6 @@ Raphael.fn.importSVG = function (svgXML) {
     };
 
     this.parseNode = function(node){
-      a = node;
       if (node.nodeName == "g") {
         var tempSet = this.set();
         for (var i = 0; i < node.childNodes.length; i++){
@@ -109,15 +106,13 @@ Raphael.fn.importSVG = function (svgXML) {
     }
 
     this.parseElement = function(elShape) {
-        node = elShape.nodeName;
+        var m_font;
+        var node = elShape.nodeName;
         if (node && strSupportedShapes.indexOf("|" + node + "|") >= 0) {
 
-            var attr = { "stroke-width": 0, "fill":"#fff" };
+            var attr = { "stroke-width": 0 }; /* over-ride Raphael.js wants to put stroke on everything */
             var shape;
             var style;
-            // find the id
-            var nodeID = elShape.getAttribute("id");
-
             m_font = "";
             for (var k=0;k<elShape.attributes.length;k++) {
                 m = elShape.attributes[k];
@@ -206,12 +201,20 @@ Raphael.fn.importSVG = function (svgXML) {
               break;
             }
 
+            // apply matrix transformation
+            var matrix = attr.transform;
+            if (matrix) {
+                matrix = matrix.substring(7, matrix.length-1).split(', ');
+                console.log(matrix)
+                //shape.matrix(+matrix[0], +matrix[1], +matrix[2], +matrix[3]);
+                shape.translate(matrix[4], matrix[5]);
+                delete attr.transform;
+            }
             shape.attr(attr);
             return shape;
         }
     };
 
-    var m_font;
     var elSVG = svgXML.getElementsByTagName("svg")[0];
     elSVG.normalize();
     for (var i=0;i<elSVG.childNodes.length;i++) {
@@ -219,7 +222,7 @@ Raphael.fn.importSVG = function (svgXML) {
     }
 
   } catch (error) {
-    alert("The SVG data you entered was invalid! (" + error + ")");
+    console.log("The SVG data you entered was invalid! (" + error + ")");
   }
 
   // return our new set
