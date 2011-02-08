@@ -4,26 +4,26 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>Raphael SVG Import - Interactive demo</title>
-	<script src="lib/raphael-min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="lib/jquery-1.4.2.js" type="text/javascript" charset="utf-8"></script>
-	<script src="./raphael-svg-import.js" type="text/javascript" charset="utf-8"></script>
-	<script>
-	
-		function parseXml(svgXML) {
-			var paper = Raphael(10,10,800,600);
-			var newSet = paper.importSVG(svgXML);
-		}
-	        
+    <script src="lib/raphael-min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/jquery-1.4.2.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./raphael-svg-import.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+    
+        function parseXml(svgXML) {
+            var paper = Raphael(10,10,800,600);
+            var newSet = paper.importSVG(svgXML);
+        }
+            
                 // must use file extension ".XML" for IE support!
-		jQuery(document).ready(function(){
-			jQuery.ajax({
-				type: "GET",
-				url: "./assets/demo.svg",
-				dataType: "xml",
-				success: parseXml
-			});
-		});
-	</script>
+        jQuery(document).ready(function(){
+            jQuery.ajax({
+                type: "GET",
+                url: "./assets/demo.svg",
+                dataType: "xml",
+                success: parseXml
+            });
+        });
+    </script>
   </head>
   
   <body>
