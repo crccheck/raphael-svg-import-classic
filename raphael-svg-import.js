@@ -17,9 +17,6 @@
 */
 Raphael.fn.importSVG = function (svgXML) {
   try {
-    // create a set to return
-    var myNewSet = this.set();
-
     this.parseElement = function(elShape) {
       var attr = {"stroke-width": 0, "fill":"#000"};
       if (elShape.attributes){
@@ -29,8 +26,7 @@ Raphael.fn.importSVG = function (svgXML) {
       } else {
         return;
       }
-      var shape;
-      var style;
+      var shape, style;
       switch(elShape.nodeName) {
         case "rect":
           shape = this.rect();
@@ -69,21 +65,19 @@ Raphael.fn.importSVG = function (svgXML) {
         shape.translate(matrix[4], matrix[5]);
         delete attr.transform;
       }
-      // put shape into set
-      myNewSet.push(shape);
 
-      // apply attributes
-      if (attr) {
-        shape.attr(attr);
-      }
+      shape.attr(attr);
 
       // assign an arbitrary id
       var nodeID = elShape.getAttribute("id");
       if (nodeID) {
         shape.node.id = nodeID;
       }
+
+      return shape;
     };
 
+    var myNewSet = this.set();
     var elShape;
     var m_font;
     var elSVG = svgXML.getElementsByTagName("svg")[0];
@@ -92,17 +86,23 @@ Raphael.fn.importSVG = function (svgXML) {
       elShape = elSVG.childNodes.item(i);
 
       if (elShape.nodeName == "g") {
-        // this is a group, parse the children, pass the id to the first child
+        // this is a group, pass the id to the first child, parse the children
         var groupId = elShape.getAttribute('id');
         if (groupId && elShape.childNodes.length) {
           elShape.childNodes.item(1).setAttribute('id',groupId);
         }
         for (var o=0;o<elShape.childNodes.length;o++) {
-          t = this.parseElement(elShape.childNodes.item(o));
+          var shape = this.parseElement(elShape.childNodes.item(o));
+          if (shape) {
+            myNewSet.push(shape);
+          }
         }
       }
       else {
-        this.parseElement(elShape);
+        var shape = this.parseElement(elShape);
+        if (shape) {
+          myNewSet.push(shape);
+        }
       }
     }
   } catch (error) {
