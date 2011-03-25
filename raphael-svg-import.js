@@ -23,11 +23,21 @@ Raphael.fn.importSVG = function (svgXML) {
         for (var i = elShape.attributes.length - 1; i >= 0; --i){
           attr[elShape.attributes[i].name] = elShape.attributes[i].value;
         }
-      } else {
-        return;
       }
       var shape, style;
       switch(elShape.nodeName) {
+        case "svg":
+        case "g":
+          // pass the id to the first child, parse the children
+          var groupId = elShape.getAttribute('id');
+          if (groupId && elShape.childNodes.length) {
+            elShape.childNodes.item(1).setAttribute('id', groupId);
+          }
+          for (var i = 0; i < elShape.childNodes.length; ++i) {
+            this.parseElement(elShape.childNodes.item(i));
+          }
+          return;
+        break;
         case "rect":
           shape = this.rect();
         break;
@@ -74,42 +84,18 @@ Raphael.fn.importSVG = function (svgXML) {
         shape.node.id = nodeID;
       }
 
+      myNewSet.push(shape);
       return shape;
     };
 
-    var myNewSet = this.set();
-    var elShape;
-    var m_font;
     var elSVG = svgXML.getElementsByTagName("svg")[0];
     elSVG.normalize();
-    for (var i=0;i<elSVG.childNodes.length;i++) {
-      elShape = elSVG.childNodes.item(i);
-
-      if (elShape.nodeName == "g") {
-        // this is a group, pass the id to the first child, parse the children
-        var groupId = elShape.getAttribute('id');
-        if (groupId && elShape.childNodes.length) {
-          elShape.childNodes.item(1).setAttribute('id',groupId);
-        }
-        for (var o=0;o<elShape.childNodes.length;o++) {
-          var shape = this.parseElement(elShape.childNodes.item(o));
-          if (shape) {
-            myNewSet.push(shape);
-          }
-        }
-      }
-      else {
-        var shape = this.parseElement(elShape);
-        if (shape) {
-          myNewSet.push(shape);
-        }
-      }
-    }
+    var myNewSet = this.set();
+    this.parseElement(elSVG);
   } catch (error) {
     console.log("The SVG data you entered was invalid! (" + error + ")");
   }
 
-  // return our new set
   return myNewSet;
 };
 
