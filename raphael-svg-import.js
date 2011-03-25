@@ -21,7 +21,7 @@ Raphael.fn.importSVG = function (svgXML) {
   var myNewSet = this.set();
   try {
     this.parseElement = function(elShape) {
-      var attr = {"stroke-width": 0, "fill":"#000"}, i;
+      var attr = {"stroke": "transparent", "stroke-width": 0, "fill":"#000"}, i;
       if (elShape.attributes){
         for (i = elShape.attributes.length - 1; i >= 0; --i){
           attr[elShape.attributes[i].name] = elShape.attributes[i].value;
