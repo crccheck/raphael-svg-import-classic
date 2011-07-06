@@ -8,13 +8,12 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="./raphael-svg-import.js" type="text/javascript" charset="utf-8"></script>
     <script>
-    
         function parseXml(svgXML) {
             var paper = Raphael(10,10,800,600);
             var newSet = paper.importSVG(svgXML);
         }
-            
-                // must use file extension ".XML" for IE support!
+
+        // must use file extension ".XML" for IE support!
         jQuery(document).ready(function(){
             jQuery.ajax({
                 type: "GET",
@@ -25,7 +24,6 @@
         });
     </script>
   </head>
-  
   <body>
   </body>
 </html>

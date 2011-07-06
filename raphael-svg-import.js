@@ -94,7 +94,7 @@ Raphael.fn.importSVG = function (svgXML) {
     elSVG.normalize();
     this.parseElement(elSVG);
   } catch (error) {
-    alert("The SVG data you entered was invalid! (" + error + ")");
+    throw "SVGParseError (" + error + ")";
   }
 
   return myNewSet;
