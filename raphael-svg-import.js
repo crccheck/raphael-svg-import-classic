@@ -1,22 +1,13 @@
 /*
-* Raphael SVG Import 0.0.1 - Extension to Raphael JS
+* Raphael SVG Import Classic 0.1.0 - Extension to Raphael JS
+* https://github.com/crccheck/raphael-svg-import-classic
 *
 * Copyright (c) 2009 Wout Fierens
 * Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
 *
-*
-* 2010-10-05 modifications by Jonas Olmstead
-* - added support for radial and linear gradients
-* - added support for paths
-* - removed prototype.js dependencies (I can't read that stuff)
-* - changed input parameter to svg xml file
-* - added support for text elements
-* - added support for reading groups into flat structure
-* - svg elements returned as a set
-*
 */
 
-/*global Raphael, alert */
+/* global Raphael */
 Raphael.fn.importSVG = function (svgXML) {
   var myNewSet = this.set();
   try {
