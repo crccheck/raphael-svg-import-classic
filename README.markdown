@@ -25,12 +25,30 @@ Then use importSVG() to convert the SVG into a raphael.js set:
         type: "GET",
         url: "assets/demo.svg",
         dataType: "xml",
-        success: function parseXml(svgXML) {
+        success: function(svgXML) {
           var paper = Raphael(10, 10, 800, 600);
           var newSet = paper.importSVG(svgXML);
         }
       });
     });
+
+If you want the Raphael paper dimensions to automatically match the SVG:
+
+    jQuery(document).ready(function(){
+      jQuery.ajax({
+        type: "GET",
+        url: "assets/demo.svg",
+        dataType: "xml",
+        success: function(svgXML) {
+          var root = svgXML.getElementsByTagName('svg')[0].getAttribute('viewBox').split(' ');
+          var width = root[2],
+              height = root[3];
+          var paper = Raphael(width, height);
+          var newSet = paper.importSVG(svgXML);
+        }
+      });
+    });
+
 
 In the assets folder a demo.svg file is provided.<br/>
 Nothing fancy but it gives you a starting point.
