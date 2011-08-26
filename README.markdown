@@ -78,8 +78,7 @@ Copyright (c) 2011 Wout Fierens. See LICENSE.txt for further details.
 
 Testing
 -------
-The original had very limited JSSpec tests that could deal with AJAX,
-so there are currently no tests.
+Visual test: Open `tests/visual_tests.html` in your browsers of interest.
 
 Final Notes
 -----------

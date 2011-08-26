@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../lib/raphael-min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="../raphael-svg-import.js"></script>
+<meta charset=utf-8 />
+<title>raphael-svg-import-classic: Visual Tests</title>
+<style>
+body {
+  color: #222;
+}
+td { border: 1px dotted black; }
+.fail th { background: #fcc; font-style: italic; }
+.note { border: 0 none; color: #555; vertical-align: top; }
+</style>
+</head>
+<body>
+  <section class="instructions">
+    <h1>Visual Tests</h1>
+    <h2>Instructions</h2>
+    <p>
+      View this file in your browsers of interest. There will be two columns.
+      The first is the SVG as rendered by the browser.
+      The second is the SVG as interpreted by raphael-svg-import.js.
+      Known across-the-board test failures are hilighted in red.
+    </p>
+    <h2>Notes</h2>
+    <p>
+      In order for parts of this demo to work, you must use a recent browser and enable local ajax calls in your browser.<br>
+      Minimum Versions:<br>
+      <dl>
+        <dt>Firefox</dt><dd>4+<dd>
+        <dt>Chrome</dt><dd>any<dd>
+    </p>
+  </section>
+  <table class="tests">
+    <thead>
+      <tr>
+        <th></th><th style="min-width: 100px;">Original</th><th>Raphael</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th colspan=3>Elementary Shapes</th>
+      </tr>
+      <tr>
+        <th>Line</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <line x1=0 y1=10 x2=80 y2=70 stroke="black" stroke-width="2" fill="red"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Circle</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Ellipse</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <ellipse cx="50" cy="50" rx="40" ry="20" stroke="purple" stroke-width="2" fill="red"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Rectangle</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <rect x="10" y="20" width="70" height="50" stroke="black" stroke-width="2" fill="blue"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr class="fail">
+        <th>Rectangle (rounded corners)</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <rect x="10" y="20" width="70" rx="20" ry="20" height="50" stroke="black" stroke-width="2" fill="gray"/>
+</svg>
+        </td>
+        <td></td>
+        <td class="note">Raphael only supports r, not rx/ry</td>
+      </tr>
+      <tr class="">
+        <th>Path (lines only)</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <path d="M20 10 L80 60 L0 50 Z" stroke="black" stroke-width="2" fill="blue"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr class="">
+        <th>Polygon</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <polygon points="20,10 80,60 0,50" stroke="black" stroke-width="2" fill="gray"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr class="">
+        <th>Polyline</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <polyline points="20,10 80,60 0,50" stroke="black" stroke-width="2" fill="gray"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>full demo</th>
+        <td><!--embed src="assets/demo.svg" type="image/svg+xml"--></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+    $('tr > td:nth-child(2)').each(function(idx, test_cell){
+      var test;
+      if ($('svg', test_cell).length) {
+          // all local test will fit in 100x100
+          var paper = Raphael($(test_cell).next()[0], 100, 100);
+          paper.importSVG(test_cell);
+      }
+      else if ((test = $('embed', test_cell)).length) {
+        var url = $(test).attr('src');
+        $.ajax({
+          type: "GET",
+          url: url,
+          dataType: "xml",
+          success: function(svgXML){
+            var root = svgXML.getElementsByTagName('svg')[0].getAttribute('viewBox').split(' ');
+            var width = root[2],
+                height = root[3];
+            var paper = Raphael($(test_cell).next()[0], width, height);
+            paper.importSVG(svgXML);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

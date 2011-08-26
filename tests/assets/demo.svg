@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="500px" height="500px" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
+
+	 <defs>
+	  <radialGradient fx="0.5" fy="0.5" cx="0.5" cy="0.5" id="radialGradient12103" r="0.5" gradientUnits="objectBoundingBox" >
+	   <stop offset="0" stop-color="#f4f4f4" />
+	   <stop offset="1" stop-color="#FF0000" />
+	  </radialGradient>
+	  <linearGradient id="linearGradient12072"  y1="1.0137" x1="0.0273973" y2="0.493151" gradientUnits="objectBoundingBox" x2="0" >
+
+	   <stop offset="0" stop-color="#FF00FF" />
+	   <stop offset="1" stop-color="#ffccff" />
+	  </linearGradient>
+	</defs>
+<circle opacity="1" fill="url(#radialGradient12103)" enable-background="new    " cx="251.5" cy="255.5" r="179"/>
+<rect x="53.603" y="93.813" fill="url(#linearGradient12072)" width="106.211" height="106.211"/>
+<circle opacity="0.3" fill="#FFFF14" cx="231.572" cy="84.708" r="54.038"/>
+<ellipse opacity="0.3" fill="#00FFFF" stroke="#0097E6" stroke-width="7" stroke-dasharray="12" cx="391.509" cy="131.292" rx="69.875" ry="29.192"/>
+<polygon opacity="0.3" fill="#00FF00" stroke="#009D00" stroke-width="7" points="129.584,339.484 64.108,354.755 18.145,305.688 37.658,241.348 
+	103.134,226.077 149.097,275.145 "/>
+<text x="280" y="400" fill="#000000" text-anchor="middle" font-family="Arial" font-size="14" >sample text</text>
+</svg>
