@@ -80,18 +80,45 @@ td { border: 1px dotted black; }
         </td>
         <td></td>
       </tr>
-      <tr class="fail">
-        <th>Rectangle (rounded corners)</th>
+      <tr class="warn">
+        <th>Rectangle <em>(rounded corners)</em></th>
         <td>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
    <rect x="10" y="20" width="70" rx="20" ry="20" height="50" stroke="black" stroke-width="2" fill="gray"/>
 </svg>
         </td>
         <td></td>
+      </tr>
+      <tr class="">
+        <th>Rectangle <em>(rounded corners, missing rx)</em></th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <rect x="10" y="20" width="70" ry="20" height="50" stroke="black" stroke-width="2" fill="gray"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr class="">
+        <th>Rectangle <em>(rounded corners, missing ry)</em></th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <rect x="10" y="20" width="70" rx="20" height="50" stroke="black" stroke-width="2" fill="gray"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr class="warn">
+        <th>Rectangle <em>(rounded corners, asymmetric)</em></th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <rect x="10" y="20" width="70" rx="2" ry="20" height="50" stroke="black" stroke-width="2" fill="gray"/>
+</svg>
+        </td>
+        <td></td>
         <td class="note">Raphael only supports r, not rx/ry</td>
       </tr>
       <tr class="">
-        <th>Path (lines only)</th>
+        <th>Path <em>(lines only)</em></th>
         <td>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
    <path d="M20 10 L80 60 L0 50 Z" stroke="black" stroke-width="2" fill="blue"/>
