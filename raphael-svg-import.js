@@ -19,7 +19,8 @@ Raphael.fn.importSVG = function (svgXML) {
         }
       }
       var shape, style;
-      switch(elShape.nodeName) {
+      var shapeName = elShape.nodeName;
+      switch(shapeName) {
         case "svg":
         case "g":
           // pass the id to the first child, parse the children
@@ -32,13 +33,9 @@ Raphael.fn.importSVG = function (svgXML) {
           }
           return;
         case "rect":
-          shape = this.rect();
-        break;
         case "circle":
-          shape = this.circle();
-        break;
         case "ellipse":
-          shape = this.ellipse();
+          shape = this[shapeName]();
         break;
         case "path":
           shape = this.path(attr.d);
@@ -47,6 +44,13 @@ Raphael.fn.importSVG = function (svgXML) {
         case "polygon":
           shape = this.polygon(attr.points);
           delete attr.points;
+        break;
+        case "polyline":
+          shape = this.polyline(attr);
+          delete attr.points;
+        break;
+        case "line":
+          shape = this.line(attr);
         break;
         case "image":
           shape = this.image();
@@ -92,6 +96,21 @@ Raphael.fn.importSVG = function (svgXML) {
 };
 
 
+Raphael.fn.line = function(attr){
+  var pathString = ["M",
+                    attr.x1,
+                    attr.y1,
+                    "L",
+                    attr.x2,
+                    attr.y2,
+                    "Z"];
+  delete attr.x1;
+  delete attr.y1;
+  delete attr.x2;
+  delete attr.y2;
+  return this.path(pathString);
+}
+
 // extending raphael with a polygon function
 Raphael.fn.polygon = function(pointString) {
   var poly = ['M'],
@@ -101,7 +120,7 @@ Raphael.fn.polygon = function(pointString) {
      var c = point[i].split(',');
      for(var j=0; j < c.length; j++) {
         var d = parseFloat(c[j]);
-        if (d)
+        if (!isNaN(d))
           poly.push(d);
      }
      if (i === 0)
@@ -109,5 +128,24 @@ Raphael.fn.polygon = function(pointString) {
   }
   poly.push('Z');
 
+  return this.path(poly);
+};
+
+Raphael.fn.polyline = function(attr) {
+  var pointString = attr.points;
+  var poly = ['M'],
+      point = pointString.split(' ');
+
+  for(var i=0; i < point.length; i++) {
+     var c = point[i].split(',');
+     for(var j=0; j < c.length; j++) {
+        var d = parseFloat(c[j]);
+        if (!isNaN(d))
+          poly.push(d);
+     }
+     if (i === 0)
+      poly.push('L');
+  }
+  delete attr.points;
   return this.path(poly);
 };
