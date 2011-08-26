@@ -42,7 +42,7 @@ td { border: 1px dotted black; }
     </thead>
     <tbody>
       <tr>
-        <th colspan=3>Elementary Shapes</th>
+        <th colspan=4>Elementary Shapes</th>
       </tr>
       <tr>
         <th>Line</th>
@@ -144,9 +144,36 @@ td { border: 1px dotted black; }
         </td>
         <td></td>
       </tr>
-      <tr>
+      <!--tr>
         <th>full demo</th>
-        <td><!--embed src="assets/demo.svg" type="image/svg+xml"--></td>
+        <td><embed src="assets/demo.svg" type="image/svg+xml"></td>
+        <td></td>
+      </tr-->
+    </tbody>
+    <tbody>
+      <tr>
+        <th colspan=4>Groups</th>
+      </tr>
+      <tr class="">
+        <th>Group</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <g>
+   <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
+  </g>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr class="">
+        <th>Group <em>(with ID)</em></th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <g id="icanhascircle">
+    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
+  </g>
+</svg>
+        </td>
         <td></td>
       </tr>
     </tbody>
@@ -157,7 +184,10 @@ td { border: 1px dotted black; }
       if ($('svg', test_cell).length) {
           // all local test will fit in 100x100
           var paper = Raphael($(test_cell).next()[0], 100, 100);
-          paper.importSVG(test_cell);
+          var set = paper.importSVG(test_cell);
+          if (set.groups) {
+            console.log(set);
+          }
       }
       else if ((test = $('embed', test_cell)).length) {
         var url = $(test).attr('src');
@@ -170,7 +200,7 @@ td { border: 1px dotted black; }
             var width = root[2],
                 height = root[3];
             var paper = Raphael($(test_cell).next()[0], width, height);
-            paper.importSVG(svgXML);
+            var set = paper.importSVG(svgXML);
           }
         });
       }
