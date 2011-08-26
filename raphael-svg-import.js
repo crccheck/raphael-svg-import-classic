@@ -10,6 +10,7 @@
 /* global Raphael */
 Raphael.fn.importSVG = function (svgXML) {
   var myNewSet = this.set();
+  var groupSet = {};
   try {
     this.parseElement = function(elShape) {
       var attr = {"stroke": "transparent", "stroke-width": 0, "fill":"#000"}, i;
@@ -27,9 +28,14 @@ Raphael.fn.importSVG = function (svgXML) {
           var groupId = elShape.getAttribute('id');
           if (groupId && elShape.childNodes.length) {
             elShape.childNodes.item(1).setAttribute('id', groupId);
+            groupSet[groupId] = this.set();
           }
           for (i = 0; i < elShape.childNodes.length; ++i) {
-            this.parseElement(elShape.childNodes.item(i));
+            if (groupId) {
+              groupSet[groupId].push(this.parseElement(elShape.childNodes.item(i)));
+            } else {
+              this.parseElement(elShape.childNodes.item(i));
+            }
           }
           return;
         case "rect":
@@ -99,6 +105,14 @@ Raphael.fn.importSVG = function (svgXML) {
     throw "SVGParseError (" + error + ")";
   }
 
+  var groupsExist = false, x;
+  for (x in groupSet){
+    groupsExist = true;
+    break;
+  }
+  if (groupsExist) {
+    myNewSet.groups = groupSet;
+  }
   return myNewSet;
 };
 
