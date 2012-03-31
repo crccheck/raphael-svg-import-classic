@@ -44,7 +44,7 @@ Raphael.fn.importSVG = function (svgXML) {
             delete attr.rx;
             delete attr.ry;
           } else {
-            attr.r = attr.rx || attr.ry;
+            attr.r = attr.rx || attr.ry || 0;
             delete attr.rx;
             delete attr.ry;
           }
