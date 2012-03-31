@@ -40,7 +40,7 @@ Raphael.fn.importSVG = function (svgXML) {
           return;
         case "rect":
           if (attr.rx && attr.ry) {
-            attr.r = (+(attr.rx || 0) + +(attr.ry || 0)) / 2;
+            attr.r = (+(attr.rx || 0) + (+(attr.ry || 0))) / 2;
             delete attr.rx;
             delete attr.ry;
           } else {
@@ -48,6 +48,7 @@ Raphael.fn.importSVG = function (svgXML) {
             delete attr.rx;
             delete attr.ry;
           }
+          /* falls through */
         case "circle":
         case "ellipse":
           shape = this[shapeName]();
@@ -130,7 +131,8 @@ Raphael.fn.line = function(attr){
   delete attr.x2;
   delete attr.y2;
   return this.path(pathString);
-}
+};
+
 
 // extending raphael with a polygon function
 Raphael.fn.polygon = function(attr) {
@@ -152,6 +154,7 @@ Raphael.fn.polygon = function(attr) {
   delete attr.points;
   return this.path(poly);
 };
+
 
 Raphael.fn.polyline = function(attr) {
   var pointString = attr.points;
