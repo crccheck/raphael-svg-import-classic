@@ -1,4 +1,4 @@
-# Raphaël SVG Import plugin - 0.1.1
+# Raphaël SVG Import plugin - 0.1.2
 
 ## What is it?
 An extension to the Raphael Vector Library.<br/>

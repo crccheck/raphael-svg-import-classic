@@ -37,7 +37,6 @@ td { border: 1px dotted black; }
       <dt>Chrome</dt><dd>any<dd>
     </dl>
     <p>You can set up a simple http server using <code>python -m SimpleHTTPServer</code></p>
-
   </section>
   <table class="tests">
     <thead>
@@ -182,17 +181,41 @@ td { border: 1px dotted black; }
         <td></td>
       </tr>
     </tbody>
+    <tbody>
+      <tr>
+        <th colspan=4>Transforms</th>
+      </tr>
+      <tr>
+        <th>Matrix (scale 70%)</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+   <rect transform="matrix(0.7, 0, 0, 0.7, 0, 0)" x="10" y="20" width="70" height="50" stroke="black" stroke-width="2" fill="cadetblue"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Matrix (rotate 30 degrees)</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+   <rect transform="matrix(0.866, 0.5, -0.5, 0.866, 0, 0)" x="10" y="20" width="70" height="50" stroke="black" stroke-width="2" fill="cadetblue"/>
+</svg>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
   </table>
   <script type="text/javascript">
     // run tests
+    var set;
     $('tr > td:nth-child(2)').each(function(idx, test_cell){
       var test;
       if ($('svg', test_cell).length) {
           // all local test will fit in 100x100
           var paper = Raphael($(test_cell).next()[0], 100, 100);
-          var set = paper.importSVG(test_cell);
+          set = paper.importSVG(test_cell);
           if (set.groups) {
-            console.log(set);
+            // console.log(set);
           }
       }
       else if ((test = $('embed', test_cell)).length) {

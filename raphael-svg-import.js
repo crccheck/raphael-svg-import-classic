@@ -82,9 +82,12 @@ Raphael.fn.importSVG = function (svgXML) {
       // apply matrix transformation
       var matrix = attr.transform;
       if (matrix) {
-        matrix = matrix.substring(7, matrix.length-1).split(', ');
-        shape.matrix(+matrix[0], +matrix[1], +matrix[2], +matrix[3]);
-        shape.translate(matrix[4], matrix[5]);
+        matrix = matrix.substring(7, matrix.length-1).split(', ')
+                 .map(function(x){ return +x; });
+        var m = shape.matrix;
+        m.add.apply(m, matrix);
+        // this seems like a very odd step:
+        shape.transform(m.toTransformString());
         delete attr.transform;
       }
 
