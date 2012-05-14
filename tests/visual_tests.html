@@ -2,7 +2,7 @@
 <html>
 <head>
 <script src="../lib/raphael-min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="../raphael-svg-import.js"></script>
 <meta charset=utf-8 />
 <title>raphael-svg-import-classic: Visual Tests</title>
@@ -27,12 +27,17 @@ td { border: 1px dotted black; }
     </p>
     <h2>Notes</h2>
     <p>
-      In order for parts of this demo to work, you must use a recent browser and enable local ajax calls in your browser.<br>
+      In order for parts of this demo to work, you must be connected to the
+      Internet (I load jquery from a CDN) and use a recent browser and enable
+      local ajax calls in your browser or serve this over http.<br>
       Minimum Versions:<br>
-      <dl>
-        <dt>Firefox</dt><dd>4+<dd>
-        <dt>Chrome</dt><dd>any<dd>
     </p>
+    <dl>
+      <dt>Firefox</dt><dd>4+<dd>
+      <dt>Chrome</dt><dd>any<dd>
+    </dl>
+    <p>You can set up a simple http server using <code>python -m SimpleHTTPServer</code></p>
+
   </section>
   <table class="tests">
     <thead>
