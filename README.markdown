@@ -75,6 +75,7 @@ See LICENSE.txt for further details.
 Testing
 -------
 Visual test: Open `tests/visual_tests.html` in your targeted browsers.
+A hosted version can be found [here](http://crccheck.github.com/raphael-svg-import-classic/tests/visual_tests.html).
 
 Final Notes
 -----------
