@@ -86,8 +86,8 @@ Raphael.fn.importSVG = function (svgXML) {
       // apply matrix transformation
       var matrix = attr.transform;
       if (matrix) {
-        matrix = matrix.substring(7, matrix.length-1).split(', ')
-                 .map(function(x){ return +x; });
+        matrix = matrix.substring(7, matrix.length-1).split(' ')
+                 .map(function(x){ return parseFloat(x); });
         var m = shape.matrix;
         m.add.apply(m, matrix);
         // this seems like a very odd step:
