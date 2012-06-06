@@ -85,7 +85,6 @@ Raphael.fn.importSVG = function (svgXML) {
             }
           }
           shape = this.text(attr.x, attr.y, elShape.text || elShape.textContent);
-          shape.origFontPt = parseInt(attr["font-size"], 10);
         break;
         default:
           return;
