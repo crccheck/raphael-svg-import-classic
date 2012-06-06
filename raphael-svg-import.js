@@ -18,6 +18,10 @@ Raphael.fn.importSVG = function (svgXML) {
   };
   try {
     this.parseElement = function(elShape) {
+      // skip text nodes
+      if (elShape.nodeType == 3) {
+        return;
+      }
       var attr = {"stroke": "transparent", "stroke-width": 0, "fill":"#000"}, i;
       if (elShape.attributes){
         for (i = elShape.attributes.length - 1; i >= 0; --i){
@@ -87,6 +91,11 @@ Raphael.fn.importSVG = function (svgXML) {
           shape = this.text(attr.x, attr.y, elShape.text || elShape.textContent);
         break;
         default:
+          var elSVG = elShape.getElementsByTagName("svg");
+          if (elSVG.length){
+            elSVG[0].normalize();
+            this.parseElement(elSVG[0]);
+          }
           return;
       }
 
@@ -114,9 +123,7 @@ Raphael.fn.importSVG = function (svgXML) {
       return shape;
     };
 
-    var elSVG = svgXML.getElementsByTagName("svg")[0];
-    elSVG.normalize();
-    this.parseElement(elSVG);
+    this.parseElement(svgXML);
   } catch (error) {
     throw "SVGParseError (" + error + ")";
   }
