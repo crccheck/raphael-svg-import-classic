@@ -29,14 +29,18 @@ Raphael.fn.importSVG = function (svgXML) {
           var groupId = elShape.getAttribute('id');
           if (groupId && elShape.childNodes.length) {
             elShape.childNodes.item(1).setAttribute('id', groupId);
-            groupSet[groupId] = this.set();
           }
+          var thisGroup = this.set();
           for (i = 0; i < elShape.childNodes.length; ++i) {
-            if (groupId) {
-              groupSet[groupId].push(this.parseElement(elShape.childNodes.item(i)));
-            } else {
-              this.parseElement(elShape.childNodes.item(i));
-            }
+            thisGroup.push(this.parseElement(elShape.childNodes.item(i)));
+          }
+          // handle display=none
+          if (attr.display === "none") {
+            thisGroup.hide();
+          }
+          // hold onto thisGroup just in case
+          if (groupId && elShape.childNodes.length) {
+            groupSet[groupId] = thisGroup;
           }
           return;
         case "rect":
