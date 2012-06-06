@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Raphael SVG Import - Interactive demo</title>
+    <script src="../lib/raphael-min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../raphael-svg-import.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      function parseXml(svgXML) {
+        paper = Raphael(0, 0, 792, 612);
+        newSet = paper.importSVG(svgXML);
+      }
+
+      // must use file extension ".XML" for IE support!
+      jQuery(document).ready(function(){
+        jQuery.ajax({
+          type: "GET",
+          url: "assets/cap-guide-2.svg",
+          dataType: "xml",
+          success: parseXml
+        });
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
