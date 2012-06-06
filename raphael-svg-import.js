@@ -12,6 +12,10 @@
 Raphael.fn.importSVG = function (svgXML) {
   var myNewSet = this.set();
   var groupSet = {};
+  var defaultTextAttr = {
+    // stroke: "none"
+    "text-anchor": "start"  // raphael defaults to "middle"
+  };
   try {
     this.parseElement = function(elShape) {
       var attr = {"stroke": "transparent", "stroke-width": 0, "fill":"#000"}, i;
@@ -75,8 +79,12 @@ Raphael.fn.importSVG = function (svgXML) {
           shape = this.image();
         break;
         case "text":
+          for (var key in defaultTextAttr){
+            if (!attr[key] && defaultTextAttr.hasOwnProperty(key)) {
+              attr[key] = defaultTextAttr[key];
+            }
+          }
           shape = this.text(attr.x, attr.y, elShape.text || elShape.textContent);
-          shape.attr("stroke","none");
           shape.origFontPt = parseInt(attr["font-size"], 10);
         break;
         default:
