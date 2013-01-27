@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="../lib/raphael-min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="../raphael-svg-import.js"></script>
-<meta charset=utf-8 />
-<title>raphael-svg-import-classic: Visual Tests</title>
-<style>
-body {
-  color: #222;
-}
-td { border: 1px dotted black; }
-.fail th { background: #fcc; font-style: italic; }
-.note { border: 0 none; color: #555; vertical-align: top; }
-</style>
+  <meta charset=utf-8 />
+  <title>raphael-svg-import-classic: Visual Tests</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="../lib/raphael-min.js"></script>
+  <script src="../raphael-svg-import.js"></script>
+  <style>
+    body {
+      color: #222;
+    }
+    td { border: 1px dotted black; }
+    .fail th { background: #fcc; font-style: italic; }
+    .note { border: 0 none; color: #555; vertical-align: top; }
+  </style>
 </head>
 <body>
   <section class="instructions">
@@ -33,8 +33,8 @@ td { border: 1px dotted black; }
       Minimum Versions:<br>
     </p>
     <dl>
-      <dt>Firefox</dt><dd>4+<dd>
-      <dt>Chrome</dt><dd>any<dd>
+      <dt>Firefox</dt><dd>4+</dd>
+      <dt>Chrome</dt><dd>any</dd>
     </dl>
     <p>You can set up a simple http server using <code>python -m SimpleHTTPServer</code></p>
   </section>
@@ -154,6 +154,7 @@ td { border: 1px dotted black; }
         <td></td>
       </tr-->
     </tbody>
+
     <tbody>
       <tr>
         <th colspan=4>Groups</th>
@@ -180,7 +181,20 @@ td { border: 1px dotted black; }
         </td>
         <td></td>
       </tr>
+      <tr class="">
+        <th>Group / transform / translate</th>
+        <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+  <g transform="translate(20, -10)">
+   <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
+   <rect x="0" y="40" width="50" height="20" stroke="black" stroke-width="2" fill="cadetblue"/>
+  </g>
+</svg>
+        </td>
+        <td></td>
+      </tr>
     </tbody>
+
     <tbody>
       <tr>
         <th colspan=4>Transforms</th>
