@@ -1,5 +1,5 @@
 /*
-* Raphael SVG Import Classic 0.1.1 - Extension to Raphael JS
+* Raphael SVG Import Classic 0.1.3 - Extension to Raphael JS
 * https://github.com/crccheck/raphael-svg-import-classic
 *
 * Raphael SVG Import Classic Copyright (c) 2012 Chris Chang
