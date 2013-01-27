@@ -42,15 +42,15 @@ Raphael.fn.importSVG = function (svgXML) {
           for (i = 0; i < elShape.childNodes.length; ++i) {
             thisGroup.push(this.parseElement(elShape.childNodes.item(i)));
           }
-          
+
           // handle transform attribute
           if (attr.transform){
             var match = /translate\(([^,]+),([^,]+)\)/.exec(attr.transform);
-          	if (match.length==3){
-          		thisGroup.translate(match[1],match[2]);
-          	}
+            if (match.length == 3){
+              thisGroup.translate(match[1], match[2]);
+            }
           }
-          
+
           // handle display=none
           if (attr.display === "none") {
             thisGroup.hide();
