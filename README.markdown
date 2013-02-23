@@ -72,6 +72,8 @@ Copyright (c) 2012 Chris Chang
 Original Raphael SVG Import Copyright (c) 2009 Wout Fierens
 See LICENSE.txt for further details.
 
+Images are in the public domain.
+
 Testing
 -------
 Visual test: Open `tests/visual_tests.html` in your targeted browsers.
