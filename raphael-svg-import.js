@@ -89,6 +89,8 @@ Raphael.fn.importSVG = function (svgXML) {
           shape = this.line(attr);
         break;
         case "image":
+          attr.src = attr['xlink:href'];
+          delete attr['xlink:href'];
           shape = this.image();
         break;
         case "text":
