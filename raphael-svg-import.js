@@ -37,8 +37,9 @@ Raphael.fn.importSVG = function (svgXML, svgId) {
           var groupId = elShape.getAttribute('id');
           var groupClass = elShape.getAttribute('class');
           if (groupId || groupClass) {
-            var elShapeChildren = elShape.childNodes, elShapeChild;
-            while (elShapeChild = elShapeChildren.nextNode()) {
+            var elShapeChildren = elShape.childNodes;
+            for (var i = 0, length = elShapeChildren.length; i < length; i++) {
+              var elShapeChild = elShapeChildren[i];
               if (groupId) {
                 elShapeChild.setAttribute('data-svg-group', groupId);
               }
@@ -48,7 +49,7 @@ Raphael.fn.importSVG = function (svgXML, svgId) {
             }
           }
           var thisGroup = this.set();
-          for (i = 0; i < elShape.childNodes.length; ++i) {
+          for (i = 0, length = elShape.childNodes.length; i < length; ++i) {
             thisGroup.push(this.parseElement(elShape.childNodes.item(i)));
           }
 
