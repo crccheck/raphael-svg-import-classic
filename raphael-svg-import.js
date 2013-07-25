@@ -9,7 +9,7 @@
 */
 
 /* global Raphael */
-Raphael.fn.importSVG = function (svgXML) {
+Raphael.fn.importSVG = function (svgXML, svgId) {
   var myNewSet = this.set();
   var groupSet = {};
   var defaultTextAttr = {
@@ -40,7 +40,7 @@ Raphael.fn.importSVG = function (svgXML) {
             var elShapeChildren = elShape.childNodes, elShapeChild;
             while (elShapeChild = elShapeChildren.nextNode()) {
               if (groupId) {
-                elShapeChild.setAttribute('data-group', groupId);
+                elShapeChild.setAttribute('data-svg-group', groupId);
               }
               if (groupClass) {
                 elShapeChild.setAttribute('class', groupClass);
@@ -130,7 +130,7 @@ Raphael.fn.importSVG = function (svgXML) {
       }
 
       // copy group id
-      shape.node.setAttribute('data-group', elShape.getAttribute('data-group'));
+      shape.node.setAttribute('data-svg-group', elShape.getAttribute('data-svg-group'));
       var shapeClass = elShape.getAttribute('class');
       if (shapeClass) {
         shape.node.setAttribute('class', shape.node.getAttribute('class') + ' ' + shapeClass);
@@ -155,6 +155,9 @@ Raphael.fn.importSVG = function (svgXML) {
     for (var i = 0, length = styles.length; i < length; i++) {
       var style = document.createElement('style'), css = styles[i].text;
       style.setAttribute('type', 'text/css');
+      if (svgId) {
+        style.setAttribute('data-svg-id', svgId);
+      }
       if (style.styleSheet) {
         style.styleSheet.cssText = css;
       } else {
