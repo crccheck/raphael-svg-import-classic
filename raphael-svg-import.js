@@ -35,10 +35,16 @@ Raphael.fn.importSVG = function (svgXML) {
         case "g":
           // pass the id to the first child, parse the children
           var groupId = elShape.getAttribute('id');
-          if (groupId) {
+          var groupClass = elShape.getAttribute('class');
+          if (groupId || groupClass) {
             var elShapeChildren = elShape.childNodes, elShapeChild;
             while (elShapeChild = elShapeChildren.nextNode()) {
-              elShapeChild.setAttribute('data-group', groupId);
+              if (groupId) {
+                elShapeChild.setAttribute('data-group', groupId);
+              }
+              if (groupClass) {
+                elShapeChild.setAttribute('class', groupClass);
+              }
             }
           }
           var thisGroup = this.set();
@@ -125,7 +131,10 @@ Raphael.fn.importSVG = function (svgXML) {
 
       // copy group id
       shape.node.setAttribute('data-group', elShape.getAttribute('data-group'));
-      shape.node.setAttribute('class', shape.node.getAttribute('class') + ' ' + elShape.getAttribute('class'));
+      var shapeClass = elShape.getAttribute('class');
+      if (shapeClass) {
+        shape.node.setAttribute('class', shape.node.getAttribute('class') + ' ' + shapeClass);
+      }
 
       shape.attr(attr);
 
