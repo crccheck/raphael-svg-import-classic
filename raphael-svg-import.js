@@ -124,7 +124,7 @@ Raphael.fn.importSVG = function (svgXML) {
       }
 
       // copy group id
-      shape.node.setAttribute('data-group', elShape.getAttribute('data-group');
+      shape.node.setAttribute('data-group', elShape.getAttribute('data-group'));
       shape.node.setAttribute('class', shape.node.getAttribute('class') + ' ' + elShape.getAttribute('class'));
 
       shape.attr(attr);
