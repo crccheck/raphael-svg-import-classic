@@ -153,7 +153,11 @@ Raphael.fn.importSVG = function (svgXML) {
     var styles = svgXML.getElementsByTagName('style');
     for (var i = 0, length = styles.length; i < length; i++) {
       var style = document.createElement('style'), css = styles[i].text;
-      'textContent' in style ? style.textContent = css : style.innerText = css;
+      if (style.styleSheet) {
+        style.styleSheet.cssText = css;
+      } else {
+        style.appendChild(document.createTextNode(css));
+      }
       document.head.appendChild(style);
     }
   } catch (error) {
