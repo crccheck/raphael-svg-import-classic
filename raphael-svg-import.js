@@ -149,6 +149,13 @@ Raphael.fn.importSVG = function (svgXML) {
     };
 
     this.parseElement(svgXML);
+    
+    var styles = svgXML.getElementsByTagName('style');
+    for (var i = 0, length = styles.length; i < length; i++) {
+      var style = document.createElement('style'), css = styles[i].text;
+      'textContent' in style ? style.textContent = css : style.innerText = css;
+      document.head.appendChild(style);
+    }
   } catch (error) {
     throw "SVGParseError (" + error + ")";
   }
