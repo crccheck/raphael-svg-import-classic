@@ -36,7 +36,7 @@ Raphael.fn.importSVG = function (svgXML) {
           // pass the id to the first child, parse the children
           var groupId = elShape.getAttribute('id');
           if (groupId && elShape.childNodes.length) {
-            elShape.childNodes.item(1).setAttribute('id', groupId);
+            elShape.childNodes.item(0).setAttribute('id', groupId);
           }
           var thisGroup = this.set();
           for (i = 0; i < elShape.childNodes.length; ++i) {
