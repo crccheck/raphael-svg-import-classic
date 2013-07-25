@@ -124,7 +124,7 @@ Raphael.fn.importSVG = function (svgXML) {
       }
 
       // copy class
-      attr.class = elShape.getAttribute("class");
+      attr['class'] = elShape.getAttribute("class");
 
       shape.attr(attr);
 
