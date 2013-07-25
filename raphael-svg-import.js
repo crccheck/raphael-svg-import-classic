@@ -135,6 +135,7 @@ Raphael.fn.importSVG = function (svgXML) {
       if (shapeClass) {
         shape.node.setAttribute('class', shape.node.getAttribute('class') + ' ' + shapeClass);
       }
+      shape.node.setAttribute('data-svg', shapeName);
 
       shape.attr(attr);
 
