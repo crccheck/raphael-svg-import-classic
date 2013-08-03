@@ -10,6 +10,7 @@
 
 /* global Raphael */
 Raphael.fn.importSVG = function (svgXML) {
+  "use strict";
   var myNewSet = this.set();
   var groupSet = {};
   var defaultTextAttr = {
