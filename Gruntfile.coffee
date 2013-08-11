@@ -8,11 +8,11 @@ module.exports = (grunt) ->
       dist:
         files:
           'raphael-svg-import.min.js': ['raphael-svg-import.js']
-    # qunit:
-    #   all: ['tests/*.html']
+    qunit:
+      all: ['tests/qunit*.html']
 
 
   grunt.loadNpmTasks 'grunt-contrib-uglify'
-  # grunt.loadNpmTasks 'grunt-contrib-qunit'
+  grunt.loadNpmTasks 'grunt-contrib-qunit'
 
-  grunt.registerTask 'default', ['uglify']
+  grunt.registerTask 'default', ['qunit', 'uglify']
