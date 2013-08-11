@@ -160,6 +160,7 @@ Raphael.fn.importSVG = function (svgXML) {
   this.parseElement(svgXML);
 
 
+  // TODO add tests for svg style attr functionality
   var forEach = Function.prototype.bind && Array.prototype.forEach ? Function.prototype.call.bind(Array.prototype.forEach) : function (arr, callback) {
     for (var i = 0, length = arr.length; i < length; i++) {
       callback(arr[i], i, arr);
