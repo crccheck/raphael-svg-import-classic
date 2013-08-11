@@ -3,8 +3,10 @@
 // and long strings in javascript suuuuucccckkksssss.
 var assertionsLibrary = {
   line: function($output) {
-    var path = $output.find('path').attr('d');
-    equal(path, 'M0,10L80,70Z');
+    equal($output.find('path[d="M0,10L80,70Z"]').length, 1);
+  },
+  circle: function($output) {
+    equal($output.find('circle[cx=50][cy=50][r=40]').length, 1);
   }
 };
 
