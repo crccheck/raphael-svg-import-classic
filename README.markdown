@@ -75,7 +75,14 @@ See LICENSE.txt for further details.
 Testing
 -------
 Visual test: Open `tests/visual_tests.html` in your targeted browsers.
-A hosted version can be found [here](http://crccheck.github.com/raphael-svg-import-classic/tests/visual_tests.html).
+A hosted version can be found [here][visual tests].
+
+Qunit test: Open `tests/qunit.html` in your targeted browers. A command line
+version can be run based on webkit with `grunt qunit`. A hosted version can be
+found [here][qunit tests].
+
+[visual tests]: http://crccheck.github.io/raphael-svg-import-classic/tests/visual_tests.html
+[qunit tests]: http://crccheck.github.io/raphael-svg-import-classic/tests/qunit.html
 
 Final Notes
 -----------
