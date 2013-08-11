@@ -11,14 +11,17 @@ var assertionsLibrary = {
 
 // TODO
 test("rendering", function() {
-  $('svg').each(function() {
+  $('table.test tr[id]').each(function() {
     var assertions = assertionsLibrary[this.id];
     if (!assertions) {
+      // no tests for this svg
       return;
     }
-    var fixture = $('#qunit-fixture').empty();
-    var paper = Raphael(fixture[0], 100, 100);
-    var set = paper.importSVG(this);
-    assertions.call(this, fixture.find('svg'));
+    var $this = $(this),
+        $originalSVG = $this.find('svg'),
+        $output = $this.children('td:last'),
+        paper = Raphael($output[0], 100, 100);
+        set = paper.importSVG($originalSVG[0]);
+    assertions.call(this, $output.find('svg'));
   });
 });
