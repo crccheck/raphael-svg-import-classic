@@ -1,7 +1,4 @@
 /*
-* Raphael SVG Import Classic 0.2.0 - Extension to Raphael JS
-* https://github.com/rreverser/raphael-svg-import-classic
-*
 * Raphael SVG Import Classic Copyright (c) 2013 Chris Chang, Ingvar Stepanyan
 * Original Raphael SVG Import Copyright (c) 2009 Wout Fierens
 * Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
@@ -155,13 +152,13 @@ Raphael.fn.importSVG = function (svgXML) {
     if (nodeID) {
       shape.node.id = nodeID;
     }
-    
+
     myNewSet.push(shape);
     return shape;
   };
 
   this.parseElement(svgXML);
-  
+
   var paper = this;
   forEach(svgXML.getElementsByTagName('style'), function (xmlStyle, i) {
     var domStyle = document.createElement('style'), css = xmlStyle.textContent || xmlStyle.text;
