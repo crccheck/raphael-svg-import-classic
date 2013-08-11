@@ -15,22 +15,16 @@ Raphael.fn.importSVG = function (svgXML) {
     "text-anchor": "start"  // raphael defaults to "middle"
   };
 
-  var forEach = Function.prototype.bind && Array.prototype.forEach ? Function.prototype.call.bind(Array.prototype.forEach) : function (arr, callback) {
-    for (var i = 0, length = arr.length; i < length; i++) {
-      callback(arr[i], i, arr);
-    }
-  };
-
   this.parseElement = function(elShape) {
     // skip text nodes
     if (elShape.nodeType === 3) {
       return;
     }
-    var attr = {"stroke": "transparent", "stroke-width": 0, "fill":"#000"}, i;
+    var attr = {"stroke": "transparent", "stroke-width": 0, "fill":"#000"}, i, n;
     if (elShape.attributes){
-      forEach(elShape.attributes, function (currentAttr) {
-        attr[currentAttr.name] = currentAttr.value;
-      });
+      for (i = 0, n = elShape.attributes.length; i < n; i++) {
+        attr[elShape.attributes[i].name] = elShape.attributes[i].value;
+      }
     }
     var shape;
     var shapeName = elShape.nodeName;
@@ -41,7 +35,7 @@ Raphael.fn.importSVG = function (svgXML) {
         var groupClass = elShape.getAttribute('class');
         if (groupId || groupClass) {
           var elShapeChildren = elShape.childNodes;
-          for (var i = 0, length = elShapeChildren.length; i < length; i++) {
+          for (i = 0, n = elShapeChildren.length; i < n; i++) {
             var elShapeChild = elShapeChildren[i];
             if (elShapeChild.nodeType === 3) continue;
             if (groupId) {
@@ -53,7 +47,7 @@ Raphael.fn.importSVG = function (svgXML) {
           }
         }
         var thisGroup = this.set();
-        for (i = 0, length = elShape.childNodes.length; i < length; ++i) {
+        for (i = 0, n = elShape.childNodes.length; i < n; i++) {
           thisGroup.push(this.parseElement(elShape.childNodes.item(i)));
         }
 
@@ -159,6 +153,12 @@ Raphael.fn.importSVG = function (svgXML) {
 
   this.parseElement(svgXML);
 
+
+  var forEach = Function.prototype.bind && Array.prototype.forEach ? Function.prototype.call.bind(Array.prototype.forEach) : function (arr, callback) {
+    for (var i = 0, length = arr.length; i < length; i++) {
+      callback(arr[i], i, arr);
+    }
+  };
   var paper = this;
   forEach(svgXML.getElementsByTagName('style'), function (xmlStyle, i) {
     var domStyle = document.createElement('style'), css = xmlStyle.textContent || xmlStyle.text;
