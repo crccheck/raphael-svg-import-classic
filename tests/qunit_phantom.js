@@ -19,7 +19,7 @@ test("rendering", function() {
     }
     var $this = $(this),
         $originalSVG = $this.find('svg'),
-        $output = $this.children('td:last'),
+        $output = $('<td/>').appendTo(this),
         paper = Raphael($output[0], 100, 100);
         set = paper.importSVG($originalSVG[0]);
     assertions.call(this, $output.find('svg'));
