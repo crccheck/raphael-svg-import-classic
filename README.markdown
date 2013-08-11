@@ -1,4 +1,4 @@
-# Raphaël SVG Import plugin - 0.1.3
+# Raphaël SVG Import plugin
 
 ## What is it?
 An extension to the Raphael Vector Library.<br/>
@@ -68,7 +68,7 @@ Nothing fancy but it gives you a starting point.
 
 ## Copyright
 
-Copyright (c) 2012 Chris Chang
+Copyright (c) 2013 Chris Chang
 Original Raphael SVG Import Copyright (c) 2009 Wout Fierens
 See LICENSE.txt for further details.
 
