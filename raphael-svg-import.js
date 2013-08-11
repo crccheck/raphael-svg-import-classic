@@ -37,8 +37,12 @@ Raphael.fn.importSVG = function (svgXML) {
           var elShapeChildren = elShape.childNodes;
           for (i = 0, n = elShapeChildren.length; i < n; i++) {
             var elShapeChild = elShapeChildren[i];
-            if (elShapeChild.nodeType === 3) continue;
+            if (elShapeChild.nodeType === 3) {
+              // skip text nodes
+              continue;
+            }
             if (groupId) {
+              // FIXME data-* attrs are not part of the SVG spec
               elShapeChild.setAttribute('data-svg-group', groupId);
             }
             if (groupClass) {
@@ -135,10 +139,12 @@ Raphael.fn.importSVG = function (svgXML) {
     if (shapeClass) {
       shape.node.setAttribute('class', (shape.node.getAttribute('class') || '') + ' ' + shapeClass);
     }
+    // FIXME data-* attrs are not part of the SVG spec
     shape.node.setAttribute('data-svg', shapeName);
 
     var group = elShape.getAttribute('data-svg-group');
     if (group) {
+      // FIXME data-* attrs are not part of the SVG spec
       shape.node.setAttribute('data-svg-group', group);
     }
 
