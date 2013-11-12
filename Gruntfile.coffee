@@ -16,3 +16,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-qunit'
 
   grunt.registerTask 'default', ['qunit', 'uglify']
+  grunt.registerTask 'test', ['qunit']

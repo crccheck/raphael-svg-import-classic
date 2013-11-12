@@ -67,6 +67,7 @@ Nothing fancy but it gives you a starting point.
 ## Dependencies
 - [Raphael JS](http://raphaeljs.com/)
 
+
 ## Contributing to Raphael SVG Import Classic
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
@@ -77,14 +78,8 @@ Nothing fancy but it gives you a starting point.
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * You can contribute a broken test case without a fix
 
-## Copyright
+### Testing
 
-Copyright (c) 2013 Chris Chang
-Original Raphael SVG Import Copyright (c) 2009 Wout Fierens
-See LICENSE.txt for further details.
-
-Testing
--------
 Visual test: Open `tests/visual_tests.html` in your targeted browsers.
 A hosted version can be found [here][visual tests].
 
@@ -92,8 +87,26 @@ Qunit test: Open `tests/qunit.html` in your targeted browers. A command line
 version can be run based on webkit with `grunt qunit`. A hosted version can be
 found [here][qunit tests].
 
+Running CLI test:
+
+```bash
+$ grunt test
+Running "qunit:all" (qunit) task
+Testing tests/qunit.html ......OK
+>> 10 assertions passed (49ms)
+
+Done, without errors.
+```
+
 [visual tests]: http://crccheck.github.io/raphael-svg-import-classic/tests/visual_tests.html
 [qunit tests]: http://crccheck.github.io/raphael-svg-import-classic/tests/qunit.html
+
+
+## Copyright
+
+Copyright (c) 2013 Chris Chang
+Original Raphael SVG Import Copyright (c) 2009 Wout Fierens
+See LICENSE.txt for further details.
 
 Final Notes
 -----------
