@@ -10,12 +10,14 @@
   <script src="libs/jquery.min.js"></script>
   <script src="../lib/raphael-min.js"></script>
   <script src="../raphael-svg-import.js"></script>
-  <script src="qunit_phantom.js"></script>
   <style>
-    #qunit-fixture {
-      /* to make it possible to inspect */
-      height: auto;
-      position: static;
+    .expect {
+      display: none;
+      position: absolute;
+      z-index: 999;
+    }
+    tr:hover .expect {
+      display: block;
     }
   </style>
 </head>
@@ -26,10 +28,113 @@
   <h2 id="qunit-userAgent"></h2>
   <ol id="qunit-tests"></ol>
   <div id="qunit-fixture"></div>
-  <div id="svg-container">
-    <svg id="line" xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
-       <line x1=0 y1=10 x2=80 y2=70 stroke="black" stroke-width="2" fill="red"/>
-    </svg>
-  </div>
+  <table class="test">
+    <thead>
+      <tr>
+        <th></th><th style="min-width: 100px;">Original</th><th>Raphael</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="heading">
+        <th colspan=4>Elementary Shapes</th>
+      </tr>
+      <tr>
+        <th>
+          Line
+          <ul class="expect">
+            <li>path[d="M0,10L80,70Z"]</li>
+          </ul>
+        </th>
+        <td>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+             <line x1=0 y1=10 x2=80 y2=70 stroke="black" stroke-width="2" fill="red"/>
+          </svg>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Circle
+          <ul class="expect">
+            <li>circle[cx=50][cy=50][r=40]</li>
+          </ul>
+        </th>
+        <td>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+             <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
+          </svg>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Ellipse
+          <ul class="expect">
+            <li>ellipse[cx=50][cy=50][rx=40][ry=20]</li>
+          </ul>
+        </th>
+        <td>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+             <ellipse cx="50" cy="50" rx="40" ry="20" stroke="purple" stroke-width="2" fill="red"/>
+          </svg>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr class="heading">
+        <th colspan=4>Groups</th>
+      </tr>
+      <tr>
+        <th>
+          Group
+          <ul class="expect">
+            <li>circle[cx=50][cy=50][r=40]</li>
+          </ul>
+        </th>
+        <td>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+            <g>
+             <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
+            </g>
+          </svg>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Group (with ID)
+          <ul class="expect">
+            <li>circle[cx=50][cy=50][r=40]</li>
+            <li>circle[data-svg-group="icanhascircle"]</li>
+          </ul>
+        </th>
+        <td>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+            <g id="icanhascircle">
+              <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
+            </g>
+          </svg>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Group / transform / translate
+          <ul class="expect">
+            <li>circle[cx=50][cy=50][r=40]</li>
+            <li>circle[transform="matrix(1,0,0,1,20,-10)"]</li>
+            <li>rect[x=0][y=40][width=50][height=20]</li>
+            <li>rect[transform="matrix(1,0,0,1,20,-10)"]</li>
+          </ul>
+        </th>
+        <td>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+            <g transform="translate(20, -10)">
+             <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
+             <rect x="0" y="40" width="50" height="20" stroke="black" stroke-width="2" fill="cadetblue"/>
+            </g>
+          </svg>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <script src="qunit_phantom.js"></script>
 </body>
 </html>
