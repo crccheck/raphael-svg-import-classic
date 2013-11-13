@@ -132,6 +132,18 @@ Raphael.fn.importSVG = function (svgXML) {
       delete attr.transform;
     }
 
+    // Raphael throws away the `style` attribute; re-interpret it.
+    if (attr.style) {
+      var styleBits = attr.style.split(';'),
+          styleBitBits, key;
+      for (i = 0; i < styleBits.length; i++) {
+        styleBitBits = styleBits[i].split(':');
+        key = $.trim(styleBitBits[0]);
+        if (key) {
+          attr[key] = $.trim(styleBitBits[1]);
+        }
+      }
+    }
     shape.attr(attr);
 
     // copy group id
