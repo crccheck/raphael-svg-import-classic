@@ -3,7 +3,7 @@ module.exports = (grunt) ->
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
     jshint:
-      all: ['raphael-svg-import.js']
+      all: ['raphael-svg-import.js', 'tests/*.js']
     qunit:
       all: ['tests/qunit*.html']
     uglify:

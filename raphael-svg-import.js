@@ -6,7 +6,7 @@
 */
 
 /* global Raphael */
-Raphael.fn.importSVG = function (svgXML) {
+Raphael.fn.importSVG = function (svgXML, options) {
   "use strict";
   var myNewSet = this.set();
   var groupSet = {};
@@ -165,7 +165,14 @@ Raphael.fn.importSVG = function (svgXML) {
       shape.node.id = nodeID;
     }
 
-    myNewSet.push(shape);
+    if (options && options.parseElement) {
+      shape = options.parseElement(shape, elShape);
+    }
+
+    if (shape) {
+      myNewSet.push(shape);
+    }
+
     return shape;
   };
 
