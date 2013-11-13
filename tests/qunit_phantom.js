@@ -9,7 +9,8 @@ $('table.test > tbody > tr:not(.heading)').each(function() {
     $this.find('ul.expect > *').each(function () {
       // the html looks like `<li>circle[x,y,rx]</li>` so run through these and
       // make sure these attributes are found in the output SVG document.
-      assert.equal($output.find(this.innerHTML).length, 1);
+      assert.equal($output.find(this.innerHTML).length, 1,
+          "Expected to find: " + this.innerHTML);
     });
   });
 });
