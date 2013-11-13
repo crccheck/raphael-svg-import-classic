@@ -22,7 +22,7 @@ Raphael.fn.importSVG = function (svgXML) {
     }
     var attr = {"stroke": "transparent", "stroke-width": 0, "fill":"#000"},
         shapeName = elShape.nodeName,
-        i, n, shape;
+        i, n, key, shape;
     if (elShape.attributes) {
       for (i = 0, n = elShape.attributes.length; i < n; i++) {
         attr[elShape.attributes[i].name] = elShape.attributes[i].value;
@@ -104,7 +104,7 @@ Raphael.fn.importSVG = function (svgXML) {
         shape = this.image();
       break;
       case "text":
-        for (var key in defaultTextAttr){
+        for (key in defaultTextAttr){
           if (!attr[key] && defaultTextAttr.hasOwnProperty(key)) {
             attr[key] = defaultTextAttr[key];
           }
@@ -135,7 +135,7 @@ Raphael.fn.importSVG = function (svgXML) {
     // Raphael throws away the `style` attribute; re-interpret it.
     if (attr.style) {
       var styleBits = attr.style.split(';'),
-          styleBitBits, key;
+          styleBitBits;
       for (i = 0; i < styleBits.length; i++) {
         styleBitBits = styleBits[i].split(':');
         key = $.trim(styleBitBits[0]);
