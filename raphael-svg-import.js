@@ -20,7 +20,7 @@ Raphael.fn.importSVG = function (svgXML, options) {
     if (elShape.nodeType === 3) {
       return;
     }
-    var attr = {"stroke": "transparent", "stroke-width": 0, "fill":"#000"},
+    var attr = {"stroke": "none", "stroke-width": 1, "fill":"black"},
         shapeName = elShape.nodeName,
         i, n, key, shape;
     if (elShape.attributes) {
