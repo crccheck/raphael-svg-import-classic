@@ -20,47 +20,47 @@ Usage
 See demo.html for the full example. Use AJAX to retrieve your SVG file as an XML document.
 Then use importSVG() to convert the SVG into a raphael.js set:
 
-    jQuery(document).ready(function(){
-      jQuery.ajax({
-        type: "GET",
-        url: "assets/demo.svg",
-        dataType: "xml",
-        success: function(svgXML) {
-          var paper = Raphael(10, 10, 800, 600);
-          var newSet = paper.importSVG(svgXML);
-        }
-      });
-    });
-
+```javascript
+jQuery(document).ready(function(){
+  jQuery.ajax({
+    type: "GET",
+    url: "assets/demo.svg",
+    dataType: "xml",
+    success: function(svgXML) {
+      var paper = Raphael(10, 10, 800, 600);
+      var newSet = paper.importSVG(svgXML);
+    }
+  });
+});
+```
 If you want the Raphael paper dimensions to automatically match the SVG:
-
-    jQuery(document).ready(function(){
-      jQuery.ajax({
-        type: "GET",
-        url: "assets/demo.svg",
-        dataType: "xml",
-        success: function(svgXML) {
-          var root = svgXML.getElementsByTagName('svg')[0].getAttribute('viewBox').split(' ');
-          var width = root[2],
-              height = root[3];
-          var paper = Raphael(width, height);
-          var newSet = paper.importSVG(svgXML);
-        }
-      });
-    });
-
+```javascript
+jQuery(document).ready(function(){
+  jQuery.ajax({
+    type: "GET",
+    url: "assets/demo.svg",
+    dataType: "xml",
+    success: function(svgXML) {
+      var root = svgXML.getElementsByTagName('svg')[0].getAttribute('viewBox').split(' ');
+      var width = root[2],
+          height = root[3];
+      var paper = Raphael(width, height);
+      var newSet = paper.importSVG(svgXML);
+    }
+  });
+});
+```
 If you want to import the SVG from an element within the page you can access to the element:
-
-    <svg id="mysvg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="500px" height="500px" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
-    	<circle opacity="0.3" fill="#FF0000" enable-background="new" cx="251.5" cy="255.5" r="179"/>
-    </svg>
-
+```xml
+<svg id="mysvg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="500px" height="500px" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
+	<circle opacity="0.3" fill="#FF0000" enable-background="new" cx="251.5" cy="255.5" r="179"/>
+</svg>
+```
 And you can access to the svg element by its id:
-
-    var paper = Raphael(10, 10, 500, 500);
-    var newSet = paper.importSVG(document.getElementById('mysvg'));
-
+```javascript
+var paper = Raphael(10, 10, 500, 500);
+var newSet = paper.importSVG(document.getElementById('mysvg'));
+```
 In the assets folder a demo.svg file is provided.<br/>
 Nothing fancy but it gives you a starting point.
 
