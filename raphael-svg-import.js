@@ -5,7 +5,7 @@
 *
 */
 
-/* global Raphael */
+/* global Raphael, $ */
 Raphael.fn.importSVG = function (svgXML, options) {
   "use strict";
   var myNewSet = this.set();
@@ -186,7 +186,7 @@ Raphael.fn.importSVG = function (svgXML, options) {
     }
   };
   var paper = this;
-  forEach(svgXML.getElementsByTagName('style'), function (xmlStyle, i) {
+  forEach(svgXML.getElementsByTagName('style'), function (xmlStyle) {
     var domStyle = document.createElement('style'), css = xmlStyle.textContent || xmlStyle.text;
     domStyle.type = 'text/css';
     document.head.appendChild(domStyle);
