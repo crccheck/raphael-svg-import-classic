@@ -1,0 +1,24 @@
+{
+  "name": "raphael-svg-import-classic",
+  "version": "0.2.1",
+  "homepage": "https://github.com/crccheck/raphael-svg-import-classic",
+  "authors": [
+    "crccheck <c@crccheck.com>"
+  ],
+  "description": "Import SVG files to Raphael",
+  "main": "raphael-svg-import.js",
+  "keywords": [
+    "svg",
+    "vml",
+    "ie",
+    "raphael"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
