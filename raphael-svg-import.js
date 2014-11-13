@@ -123,8 +123,12 @@ Raphael.fn.importSVG = function (svgXML, options) {
     // apply matrix transformation
     var matrix = attr.transform;
     if (matrix) {
-      matrix = matrix.substring(7, matrix.length-1).split(' ')
-               .map(function(x){ return parseFloat(x); });
+      // strip `matrix(...)` text and then tokenize
+      matrix = matrix.substring(7, matrix.length-1).split(' ');
+      // cast matrix elements, parseFloat don't care if there's commas or not
+      for (var idx in matrix) {
+        matrix[idx] = parseFloat(matrix[idx]);
+      }
       var m = shape.matrix;
       m.add.apply(m, matrix);
       // this seems like a very odd step:
