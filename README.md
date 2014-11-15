@@ -104,7 +104,7 @@ Done, without errors.
 
 ## Copyright
 
-Copyright (c) 2013 Chris Chang
+Copyright (c) 2014 Chris Chang
 Original Raphael SVG Import Copyright (c) 2009 Wout Fierens
 See LICENSE.txt for further details.
 

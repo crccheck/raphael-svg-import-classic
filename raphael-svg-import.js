@@ -1,5 +1,5 @@
 /*
-* Raphael SVG Import Classic Copyright (c) 2013 Chris Chang, Ingvar Stepanyan
+* Raphael SVG Import Classic Copyright (c) 2014 Chris Chang, Ingvar Stepanyan
 * Original Raphael SVG Import Copyright (c) 2009 Wout Fierens
 * Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
 *
