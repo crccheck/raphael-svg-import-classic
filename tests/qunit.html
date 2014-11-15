@@ -11,12 +11,25 @@
   <script src="../lib/raphael-min.js"></script>
   <script src="../raphael-svg-import.js"></script>
   <style>
+    .heading > th {
+      background: aquamarine;
+    }
     .expect {
-      display: none;
+      color: #aaa;
       position: absolute;
+      font-size: 0.7rem;
+      font-weight: normal;
+      text-align: left;
+      padding-left: 1em;
       z-index: 999;
     }
     tr:hover .expect {
+      color: #222;
+    }
+    .test td {
+      border: 1px solid black;
+    }
+    .test svg {
       display: block;
     }
   </style>
@@ -144,6 +157,64 @@
         <td>
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
             <rect x="0" y="40" width="50" height="20" stroke="black" stroke-width="2" fill="cadetblue" style="fill: #008000; stroke-width: 4;"/>
+          </svg>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr class="heading">
+        <th colspan=4>Transform Matrix</th>
+      </tr>
+      <tr>
+        <th>
+          Matrix (scale 70%)
+          <ul class="expect">
+            <li>rect[transform="matrix(0.7,0,0,0.7,0,0)"]</li>
+          </ul>
+        </th>
+        <td>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+            <rect transform="matrix(0.7, 0, 0, 0.7, 0, 0)" x="10" y="20" width="70" height="50" stroke="black" stroke-width="2" fill="cadetblue"/>
+          </svg>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Matrix (rotate 30 degrees)
+          <ul class="expect">
+            <li>rect[transform="matrix(0.866,0.5,-0.5,0.866,0,0)"]</li>
+          </ul>
+        </th>
+        <td>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+            <rect transform="matrix(0.866, 0.5, -0.5, 0.866, 0, 0)" x="10" y="20" width="70" height="50" stroke="black" stroke-width="2" fill="cadetblue"/>
+          </svg>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Matrix (translate)
+          <ul class="expect">
+            <li>rect[transform="matrix(1,0,0,1,20.1,10.1)"]</li>
+          </ul>
+        </th>
+        <td>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+            <rect transform="matrix(1, 0, 0, 1, 20.1, 10.1)" x="10" y="20" width="70" height="50" stroke="black" stroke-width="2" fill="cadetblue"/>
+          </svg>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Matrix (translate, no commas)
+          <ul class="expect">
+            <li>rect[transform="matrix(1,0,0,1,20.1,10.1)"]</li>
+          </ul>
+        </th>
+        <td>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=100 height=100>
+            <rect transform="matrix(1 0 0 1 20.1 10.1)" x="10" y="20" width="70" height="50" stroke="black" stroke-width="2" fill="cadetblue"/>
           </svg>
         </td>
       </tr>

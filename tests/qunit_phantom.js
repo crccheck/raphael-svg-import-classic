@@ -1,3 +1,4 @@
+/* global $, QUnit, Raphael, module, test, equal */
 $('table.test > tbody > tr:not(.heading)').each(function() {
   var $this = $(this),
       title = $.trim($this.find('th').contents().eq(0).text());
