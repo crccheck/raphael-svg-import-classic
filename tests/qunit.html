@@ -11,12 +11,25 @@
   <script src="../lib/raphael-min.js"></script>
   <script src="../raphael-svg-import.js"></script>
   <style>
+    .heading > th {
+      background: aquamarine;
+    }
     .expect {
-      display: none;
+      color: #aaa;
       position: absolute;
+      font-size: 0.7rem;
+      font-weight: normal;
+      text-align: left;
+      padding-left: 1em;
       z-index: 999;
     }
     tr:hover .expect {
+      color: #222;
+    }
+    .test td {
+      border: 1px solid black;
+    }
+    .test svg {
       display: block;
     }
   </style>
