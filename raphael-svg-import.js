@@ -142,9 +142,9 @@ Raphael.fn.importSVG = function (svgXML, options) {
           styleBitBits;
       for (i = 0; i < styleBits.length; i++) {
         styleBitBits = styleBits[i].split(':');
-        key = $.trim(styleBitBits[0]);
+        key = styleBitBits[0].trim();
         if (key) {
-          attr[key] = $.trim(styleBitBits[1]);
+          attr[key] = styleBitBits[1].trim();
         }
       }
     }
