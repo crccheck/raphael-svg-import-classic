@@ -6,6 +6,9 @@
 */
 
 /* global Raphael, $ */
+if (!Raphael && require){
+  var Raphael = require('raphael');
+}
 Raphael.fn.importSVG = function (svgXML, options) {
   "use strict";
   var myNewSet = this.set();
