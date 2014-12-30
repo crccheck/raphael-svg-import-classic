@@ -5,7 +5,6 @@
 *
 */
 
-/* global Raphael, $ */
 Raphael.fn.importSVG = function (svgXML, options) {
   "use strict";
   var myNewSet = this.set();
@@ -136,15 +135,20 @@ Raphael.fn.importSVG = function (svgXML, options) {
       delete attr.transform;
     }
 
+    // minimal polyfill for String.trim()
+    var trim = function(string){
+        return string.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+    };
+
     // Raphael throws away the `style` attribute; re-interpret it.
     if (attr.style) {
       var styleBits = attr.style.split(';'),
           styleBitBits;
       for (i = 0; i < styleBits.length; i++) {
         styleBitBits = styleBits[i].split(':');
-        key = styleBitBits[0].trim();
+        key = trim(styleBitBits[0]);
         if (key) {
-          attr[key] = styleBitBits[1].trim();
+          attr[key] = trim(styleBitBits[1]);
         }
       }
     }
