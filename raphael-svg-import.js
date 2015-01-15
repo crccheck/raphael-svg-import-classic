@@ -16,6 +16,17 @@ Raphael.fn.importSVG = function (svgXML, options) {
     // stroke: "none"
     "text-anchor": "start"  // raphael defaults to "middle"
   };
+  // minimal polyfill for String.trim()
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim#Polyfill
+  var trim = function(string){
+      return string.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+  };
+  // polyfill for Array.forEach
+  var forEach = Function.prototype.bind && Array.prototype.forEach ? Function.prototype.call.bind(Array.prototype.forEach) : function (arr, callback) {
+    for (var i = 0, length = arr.length; i < length; i++) {
+      callback(arr[i], i, arr);
+    }
+  };
 
   this.parseElement = function(elShape) {
     // skip text nodes
@@ -138,11 +149,6 @@ Raphael.fn.importSVG = function (svgXML, options) {
       delete attr.transform;
     }
 
-    // minimal polyfill for String.trim()
-    var trim = function(string){
-        return string.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
-    };
-
     // Raphael throws away the `style` attribute; re-interpret it.
     if (attr.style) {
       var styleBits = attr.style.split(';'),
@@ -191,11 +197,6 @@ Raphael.fn.importSVG = function (svgXML, options) {
 
 
   // TODO add tests for svg style attr functionality
-  var forEach = Function.prototype.bind && Array.prototype.forEach ? Function.prototype.call.bind(Array.prototype.forEach) : function (arr, callback) {
-    for (var i = 0, length = arr.length; i < length; i++) {
-      callback(arr[i], i, arr);
-    }
-  };
   var paper = this;
   forEach(svgXML.getElementsByTagName('style'), function (xmlStyle) {
     var domStyle = document.createElement('style'), css = xmlStyle.textContent || xmlStyle.text;
