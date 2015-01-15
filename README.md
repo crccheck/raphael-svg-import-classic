@@ -80,22 +80,34 @@ Nothing fancy but it gives you a starting point.
 
 ### Testing
 
-Visual test: Open `tests/visual_tests.html` in your targeted browsers.
-A hosted version can be found [here][visual tests].
+#### Qunit
 
-Qunit test: Open `tests/qunit.html` in your targeted browers. A command line
+Open `tests/qunit.html` in your targeted browers. A command line
 version can be run based on webkit with `grunt qunit`. A hosted version can be
 found [here][qunit tests].
 
-Running CLI test:
+#### Visual
+
+Open `tests/visual_tests.html` in your targeted browsers.
+A hosted version can be found [here][visual tests].
+
+#### Old IE testing
+
+Follow the same instructions as above IE. When looking at the Qunit test in IE,
+all tests will fail, but the output should look the same as other browsers.
+
+#### From the command line
 
 ```bash
 $ grunt test
-Running "qunit:all" (qunit) task
-Testing tests/qunit.html ......OK
->> 10 assertions passed (49ms)
+Running "jshint:all" (jshint) task
+>> 2 files lint free.
 
-Done, without errors.
+Running "qunit:all" (qunit) task
+Testing tests/qunit.html .............OK
+>> 20 assertions passed (57ms)
+
+Done, without errors
 ```
 
 [visual tests]: http://crccheck.github.io/raphael-svg-import-classic/tests/visual_tests.html
@@ -104,7 +116,7 @@ Done, without errors.
 
 ## Copyright
 
-Copyright (c) 2014 Chris Chang
+Copyright (c) 2015 Chris Chang
 Original Raphael SVG Import Copyright (c) 2009 Wout Fierens
 See LICENSE.txt for further details.
 
