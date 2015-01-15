@@ -5,7 +5,6 @@
 *
 */
 
-/* global Raphael, $ */
 if (!Raphael && require){
   var Raphael = require('raphael');
 }
@@ -139,15 +138,20 @@ Raphael.fn.importSVG = function (svgXML, options) {
       delete attr.transform;
     }
 
+    // minimal polyfill for String.trim()
+    var trim = function(string){
+        return string.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+    };
+
     // Raphael throws away the `style` attribute; re-interpret it.
     if (attr.style) {
       var styleBits = attr.style.split(';'),
           styleBitBits;
       for (i = 0; i < styleBits.length; i++) {
         styleBitBits = styleBits[i].split(':');
-        key = $.trim(styleBitBits[0]);
+        key = trim(styleBitBits[0]);
         if (key) {
-          attr[key] = $.trim(styleBitBits[1]);
+          attr[key] = trim(styleBitBits[1]);
         }
       }
     }
