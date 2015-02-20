@@ -111,7 +111,7 @@ Raphael.fn.importSVG = function (svgXML, options) {
             attr[key] = defaultTextAttr[key];
           }
         }
-        shape = this.text(attr.x, attr.y, elShape.text || elShape.textContent);
+        shape = this.text(attr.x, attr.y, elShape.text || elShape.textContent || elShape.innerText || elShape.outerText);
       break;
       default:
         var elSVG = elShape.getElementsByTagName("svg");
