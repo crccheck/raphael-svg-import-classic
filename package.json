@@ -1,7 +1,7 @@
 {
   "name": "raphael-svg-import-classic",
   "description": "Import SVG files to Raphel",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "raphael-svg-import.js",
   "repository": {
     "type": "git",
