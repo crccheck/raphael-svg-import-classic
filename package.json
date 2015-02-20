@@ -13,7 +13,10 @@
     "Miguel González"
   ],
   "license": "MIT",
-  "readmeFilename": "README.markdown",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/crccheck/raphael-svg-import-classic/issues"
   },
