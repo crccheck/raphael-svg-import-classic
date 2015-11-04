@@ -9,3 +9,4 @@
 * Commit and push until you are happy with your contribution
 * Make sure to add tests for it. This is important to prevent it from breaking
   in the future.
+* Add yourself to the contributors list in `package.json`
