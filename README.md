@@ -1,11 +1,14 @@
-# Raphaël SVG Import plugin
+Raphaël SVG Import plugin
+=========================
 
-## What is it?
-An extension to the Raphael Vector Library.<br/>
-It enables Raphael to import raw SVG data.
+What is this?
+-------------
+
+An extension to the Raphael Vector Library. It enables Raphael to import raw
+SVG data.
 
 Fork Notes
-==========
+----------
 
 This is a fork of [raphael.svg-import](https://github.com/wout/raphael-svg-import).
 When the original raphael-svg-import reached 0.0.3, a major backwards-incompatible change was introduced.
@@ -33,7 +36,9 @@ jQuery(document).ready(function(){
   });
 });
 ```
+
 If you want the Raphael paper dimensions to automatically match the SVG:
+
 ```javascript
 jQuery(document).ready(function(){
   jQuery.ajax({
@@ -50,7 +55,10 @@ jQuery(document).ready(function(){
   });
 });
 ```
-If you want to import the SVG from an element within the page you can access to the element:
+
+If you want to import the SVG from an element within the page you can access to
+the element:
+
 ```xml
 <svg id="mysvg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="500px" height="500px" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
 	<circle opacity="0.3" fill="#FF0000" enable-background="new" cx="251.5" cy="255.5" r="179"/>
@@ -64,39 +72,32 @@ var newSet = paper.importSVG(document.getElementById('mysvg'));
 In the assets folder a demo.svg file is provided.<br/>
 Nothing fancy but it gives you a starting point.
 
-## Dependencies
+
+Dependencies
+------------
 - [Raphael JS](http://raphaeljs.com/)
 
 
-## Contributing to Raphael SVG Import Classic
+Tests
+-----
 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* You can contribute a broken test case without a fix
-
-### Testing
-
-#### Qunit
+### Qunit
 
 Open `tests/qunit.html` in your targeted browers. A command line
 version can be run based on webkit with `grunt qunit`. A hosted version can be
 found [here][qunit tests].
 
-#### Visual
+### Visual
 
 Open `tests/visual_tests.html` in your targeted browsers.
 A hosted version can be found [here][visual tests].
 
-#### Old IE testing
+### Old IE testing
 
 Follow the same instructions as above IE. When looking at the Qunit test in IE,
 all tests will fail, but the output should look the same as other browsers.
 
-#### From the command line
+### From the command line
 
 ```bash
 $ grunt test
@@ -114,7 +115,8 @@ Done, without errors
 [qunit tests]: http://crccheck.github.io/raphael-svg-import-classic/tests/qunit.html
 
 
-## Copyright
+Copyright
+---------
 
 Copyright (c) 2015 Chris Chang
 Original Raphael SVG Import Copyright (c) 2009 Wout Fierens
