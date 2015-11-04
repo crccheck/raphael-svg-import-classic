@@ -83,9 +83,9 @@ Tests
 
 ### Qunit
 
-Open `tests/qunit.html` in your targeted browers. A command line
-version can be run based on webkit with `grunt qunit`. A hosted version can be
-found [here][qunit tests].
+Open `tests/qunit.html` in your targeted browers. A command line version can be
+run based on webkit with `grunt qunit`. A hosted version can be found
+[here][qunit tests].
 
 ### Visual
 
@@ -110,6 +110,15 @@ Testing tests/qunit.html .............OK
 
 Done, without errors
 ```
+
+### Writing tests
+
+There's a domain specific language (DSL) to make writing tests easier. In
+`tests/qunit.html`, there's a `tables.test` element. Every `tbody` inside is a
+test suite, and every `tr` is a test case. The first cell, a `th`, has the name
+of the test. The second cell, a `td` has the `svg` that's to be processed. Back
+in the first cell, make a `ul.expect > li` with items that have the jQuery
+selectors required to assert that the Raphael output is correct.
 
 [visual tests]: http://crccheck.github.io/raphael-svg-import-classic/tests/visual_tests.html
 [qunit tests]: http://crccheck.github.io/raphael-svg-import-classic/tests/qunit.html
