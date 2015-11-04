@@ -163,6 +163,15 @@ Raphael.fn.importSVG = function (svgXML, options) {
     }
     shape.attr(attr);
 
+    // Adds dataattributes to raphael
+    for (var attributeIndex = 0; attributeIndex < elShape.attributes.length; attributeIndex++) {
+        var attribute = elShape.attributes[attributeIndex];
+        // Checks if attribute is an data-attribute
+        if(attribute.name.indexOf('data-') === 0) {
+            shape.data(attribute.name.replace(/data-/, ''), attribute.value);
+        }
+    }
+
     // copy group id
     var shapeClass = elShape.getAttribute('class');
     if (shapeClass) {
