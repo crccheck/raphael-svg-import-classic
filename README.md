@@ -83,14 +83,16 @@ Tests
 
 ### Qunit
 
-Open `tests/qunit.html` in your targeted browers. A command line version can be
-run based on webkit with `grunt qunit`. A hosted version can be found
+Open `tests/qunit.html` in your targeted browers. You'll find a series of
+simple SVGs that each test a specific aspect of the conversion. A command line
+version can be run with `grunt qunit`. A hosted version can be found
 [here][qunit tests].
 
 ### Visual
 
-Open `tests/visual_tests.html` in your targeted browsers.
-A hosted version can be found [here][visual tests].
+Open `tests/visual_tests.html` in your targeted browsers. A hosted version can
+be found [here][visual tests]. The visual tests are deprecated for the qunit
+tests.
 
 ### Old IE testing
 
@@ -101,9 +103,6 @@ all tests will fail, but the output should look the same as other browsers.
 
 ```bash
 $ grunt test
-Running "jshint:all" (jshint) task
->> 2 files lint free.
-
 Running "qunit:all" (qunit) task
 Testing tests/qunit.html .............OK
 >> 20 assertions passed (57ms)
