@@ -9,3 +9,16 @@ tests/libs:
 	cp node_modules/raphael/raphael.js $@
 	cp node_modules/jquery/dist/jquery.js $@
 	cp node_modules/qunitjs/qunit/qunit.* $@
+
+
+# To bump versions, edit the `VERSION` file and then run `make version`, or
+# programmatically: `echo "1.2.3" > VERSION && make version`
+VERSION = $(shell cat VERSION)
+SED = sed
+ifeq ($(shell uname), Darwin)
+    SED = gsed
+endif
+
+.PHONY: version
+version:
+	@$(SED) -i -r /version/s/[0-9.]+/$(VERSION)/ package.json bower.json
