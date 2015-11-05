@@ -1,0 +1,17 @@
+rules:
+  no-console: 1
+  # two space indentions
+  indent: [1, 2]
+  # Prefer single quotes unless we need to add an escape
+  quotes: [1, single, avoid-escape]
+  linebreak-style:
+    - 2
+    - unix
+  semi:
+    - 2
+    - always
+env:
+  browser: true
+  node: true
+
+extends: 'eslint:recommended'
