@@ -1,12 +1,10 @@
 # Contributing to Raphael SVG Import Classic
 
-* Check out the latest `master` to make sure the feature hasn't been
-  implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it
-  and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important to prevent it from breaking
-  in the future.
-* Add yourself to the contributors list in `package.json`
+* [ ] Fork the project
+* [ ] Start a feature/bugfix branch with a meaningful branch name
+* [ ] Hack away. Don't worry about being perfect!
+* [ ] Make sure to add tests for it. This is important to prevent your change
+  from breaking in the future. If your pull request does not have tests, it may
+  take longer to get accepted.
+* [ ] Run `make delint` to auto-format the code
+* [ ] Add yourself to the contributors list in `package.json`

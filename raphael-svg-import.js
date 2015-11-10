@@ -47,54 +47,54 @@ Raphael.fn.importSVG = function (svgXML, options) {
       var groupId = elShape.getAttribute('id');
       var groupClass = elShape.getAttribute('class');
       if (groupId || groupClass) {
-          var elShapeChildren = elShape.childNodes;
-          for (i = 0, n = elShapeChildren.length; i < n; i++) {
-            var elShapeChild = elShapeChildren[i];
-            if (elShapeChild.nodeType === 3) {
+        var elShapeChildren = elShape.childNodes;
+        for (i = 0, n = elShapeChildren.length; i < n; i++) {
+          var elShapeChild = elShapeChildren[i];
+          if (elShapeChild.nodeType === 3) {
               // skip text nodes
-              continue;
-            }
-            if (groupId) {
+            continue;
+          }
+          if (groupId) {
               // FIXME data-* attrs are not part of the SVG spec
-              elShapeChild.setAttribute('data-svg-group', groupId);
-            }
-            if (groupClass) {
-              elShapeChild.setAttribute('class', (elShapeChild.getAttribute('class') || '') + ' ' + groupClass);
-            }
+            elShapeChild.setAttribute('data-svg-group', groupId);
+          }
+          if (groupClass) {
+            elShapeChild.setAttribute('class', (elShapeChild.getAttribute('class') || '') + ' ' + groupClass);
           }
         }
+      }
       var thisGroup = this.set();
       for (i = 0, n = elShape.childNodes.length; i < n; i++) {
-          thisGroup.push(this.parseElement(elShape.childNodes.item(i)));
-        }
+        thisGroup.push(this.parseElement(elShape.childNodes.item(i)));
+      }
 
         // handle transform attribute
       if (attr.transform){
-          var match = /translate\(([^,]+),([^,]+)\)/.exec(attr.transform);
-          if (match.length == 3){
-            thisGroup.translate(match[1], match[2]);
-          }
+        var match = /translate\(([^,]+),([^,]+)\)/.exec(attr.transform);
+        if (match.length == 3){
+          thisGroup.translate(match[1], match[2]);
         }
+      }
 
         // handle display=none
       if (attr.display === 'none') {
-          thisGroup.hide();
-        }
+        thisGroup.hide();
+      }
         // hold onto thisGroup just in case
       if (groupId && elShape.childNodes.length) {
-          groupSet[groupId] = thisGroup;
-        }
+        groupSet[groupId] = thisGroup;
+      }
       return;
     case 'rect':
       if (attr.rx && attr.ry) {
-          attr.r = (+(attr.rx || 0) + (+(attr.ry || 0))) / 2;
-          delete attr.rx;
-          delete attr.ry;
-        } else {
-          attr.r = attr.rx || attr.ry || 0;
-          delete attr.rx;
-          delete attr.ry;
-        }
+        attr.r = (+(attr.rx || 0) + (+(attr.ry || 0))) / 2;
+        delete attr.rx;
+        delete attr.ry;
+      } else {
+        attr.r = attr.rx || attr.ry || 0;
+        delete attr.rx;
+        delete attr.ry;
+      }
         /* falls through */
     case 'circle':
     case 'ellipse':
@@ -118,18 +118,18 @@ Raphael.fn.importSVG = function (svgXML, options) {
       break;
     case 'text':
       for (key in defaultTextAttr){
-          if (!attr[key] && defaultTextAttr.hasOwnProperty(key)) {
-            attr[key] = defaultTextAttr[key];
-          }
+        if (!attr[key] && defaultTextAttr.hasOwnProperty(key)) {
+          attr[key] = defaultTextAttr[key];
         }
+      }
       shape = this.text(attr.x, attr.y, elShape.text || elShape.textContent || elShape.innerText || elShape.outerText);
       break;
     default:
       var elSVG = elShape.getElementsByTagName('svg');
       if (elSVG.length){
-          elSVG[0].normalize();
-          this.parseElement(elSVG[0]);
-        }
+        elSVG[0].normalize();
+        this.parseElement(elSVG[0]);
+      }
       return;
     }
 
@@ -168,8 +168,8 @@ Raphael.fn.importSVG = function (svgXML, options) {
       var attribute = elShape.attributes[attributeIndex];
         // Checks if attribute is an data-attribute
       if(attribute.name.indexOf('data-') === 0) {
-          shape.data(attribute.name.replace(/data-/, ''), attribute.value);
-        }
+        shape.data(attribute.name.replace(/data-/, ''), attribute.value);
+      }
     }
 
     // copy group id
@@ -233,8 +233,8 @@ Raphael.fn.importSVG = function (svgXML, options) {
     });
   });
 
-  var groupsExist = false, x;
-  for (x in groupSet){
+  var groupsExist = false;
+  for (var __ in groupSet){  // eslint-disable-line
     groupsExist = true;
     break;
   }
@@ -270,12 +270,12 @@ Raphael.fn.polygon = function(attr) {
   for(var i=0; i < point.length; i++) {
     var c = point[i].split(',');
     for(var j=0; j < c.length; j++) {
-       var d = parseFloat(c[j]);
-       if (!isNaN(d))
-          poly.push(d);
-     }
+      var d = parseFloat(c[j]);
+      if (!isNaN(d))
+        poly.push(d);
+    }
     if (i === 0)
-       poly.push('L');
+      poly.push('L');
   }
   poly.push('Z');
   delete attr.points;
@@ -291,12 +291,12 @@ Raphael.fn.polyline = function(attr) {
   for(var i=0; i < point.length; i++) {
     var c = point[i].split(',');
     for(var j=0; j < c.length; j++) {
-       var d = parseFloat(c[j]);
-       if (!isNaN(d))
-          poly.push(d);
-     }
+      var d = parseFloat(c[j]);
+      if (!isNaN(d))
+        poly.push(d);
+    }
     if (i === 0)
-       poly.push('L');
+      poly.push('L');
   }
   delete attr.points;
   return this.path(poly);
