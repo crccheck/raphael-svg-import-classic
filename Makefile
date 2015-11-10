@@ -22,3 +22,8 @@ endif
 .PHONY: version
 version:
 	@$(SED) -i -r /version/s/[0-9.]+/$(VERSION)/ package.json bower.json
+
+# Only publish a release if the commit is properly tagged
+publish:
+	git describe --exact-match --tags HEAD | grep --silent $(VERSION)
+	# npm publish
