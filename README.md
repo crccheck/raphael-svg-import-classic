@@ -1,6 +1,8 @@
 Raphaël SVG Import plugin
 =========================
 
+[![Build Status](https://travis-ci.org/crccheck/raphael-svg-import-classic.svg)](https://travis-ci.org/crccheck/raphael-svg-import-classic)
+
 What is this?
 -------------
 

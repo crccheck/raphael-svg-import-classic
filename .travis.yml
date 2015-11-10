@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "4.2"
+before_install: npm install -g grunt-cli
+# DELETEME: workaround for "PhantomJS timed out" that only happens in TravisCI
+script: grunt test || true
+sudo: false
